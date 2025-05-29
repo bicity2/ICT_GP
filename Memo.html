@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHPメモ</title>
+</head>
+
+<body>
+  <h1>コマンド</h1>
+  <table border="1">
+    <tr>
+      <thead>
+        <th>用途</th>
+        <th>コマンド</th>
+        <th>引数</th>
+      </thead>
+    </tr>
+
+    <tr>
+      <td>アプリ作成　</td>
+      <td>composer create-project laravel/laravel</td>
+      <td>末尾に [アプリ名] </td>
+    </tr>
+
+
+    <tr>
+      <td>サーバー起動　</td>
+      <td>php artisan serve</td>
+      <td>引数 なし</td>
+    </tr>
+
+    <tr>
+      <td>コントローラ作成　</td>
+      <td>php artisan make:controller</td>
+      <td>末尾に [ コントローラ名 ]</td>
+    </tr>
+
+    <tr>
+      <td>マイグレーション作成　</td>
+      <td>php artisan make:migration</td>
+      <td>末尾に [ create_xxxx_table ]</td>
+    </tr>
+
+    <tr>
+      <td rowspan="3">マイグレーション<br>実行<br>
+        （上から順番通りに）　</td>
+      <td colspan="2">php artisan migrate --path=database/migrations/2025_05_29_025928_create_books_table.php</td>
+    </tr>
+    <tr>
+      <td colspan="2">php artisan migrate --path=database/migrations/2025_05_29_040341_create_members_table.php</td>
+    </tr>
+    <tr>
+      <td colspan="2">php artisan migrate</td>
+    </tr>
+
+    <tr>
+      <td>シーダ作成　</td>
+      <td>php artisan make:seeder</td>
+      <td>末尾に [ XxxxTableSeeder ] 先頭大文字</td>
+    </tr>
+
+    <tr>
+      <td>シーダ実行　</td>
+      <td>php artisan db:seed --class=""</td>
+      <td>末尾に [ "XxxxTableSeeder" ] 先頭大文字</td>
+    </tr>
+
+    <tr>
+      <td>モデル作成　</td>
+      <td>php article make:model </td>
+      <td>末尾に [ Xxxx ] 先頭大文字</td>
+    </tr>
+
+  </table>
+  <hr>
+</body>
+
+</html>
