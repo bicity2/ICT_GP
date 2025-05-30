@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Article;
+use App\Models\Book;
 
-class DbController extends Controller
+class BookController extends Controller
 {
     public function add()
     {
@@ -13,13 +13,17 @@ class DbController extends Controller
     }
     public function add2(Request $req)
     {
-        $article = new Article();
-        $article->user_name = $req->user_name;
-        $article->posted_item = $req->posted_item;
+        $article = new Book();
+        $article->title = $req->title;
+        $article->author = $req->author;
+        $article->publisher = $req->publisher;
+        $article->isbn = $req->isbn;
         $article->save();
         $data = [
-            'user_name'=>$req->user_name,
-            'posted_item'=>$req->posted_item
+            'title'=>$req->title,
+            'author'=>$req->author,
+            'publisher'=>$req->publisher,
+            'isbn'=>$req->isbn
         ];
         return view('db.add2',$data);
 }

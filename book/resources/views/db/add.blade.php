@@ -12,13 +12,20 @@
     <form action="/db/add2"method="post">
         @csrf
         <div class="mb-3">
-            <label for="user_name"class="form-label">投稿者名</label>
-            <input type="text"class="form-control"name="user_name"id="user_name"required>
+            <label for="title"class="form-label">title</label>
+            <input type="text"class="form-control"name="title"id="title"required>
         </div>
         <div class="mb-3">
-            <label for="posted_item"class="form-label">投稿記事</label>
-            <textarea class="form-control"name="posted_item"id="posted_item"rows="3"required>
-        </textarea>
+            <label for="author"class="form-label">author</label>
+            <input type="text"class="form-control"name="author"id="author"required>
+        </div>
+        <div class="mb-3">
+            <label for="publisher"class="form-label">publisher</label>
+            <input type="text"class="form-control"name="publisher"id="publisher"required>
+        </div>
+        <div class="mb-3">
+            <label for="isbn"class="form-label">isbn</label>
+            <input type="text"class="form-control"name="isbn"id="isbn"required>
         </div>
         <input type="submit"value="登録"class="btn btn-primary">
      <form>

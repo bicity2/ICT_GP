@@ -12,8 +12,10 @@
     <table class="table">
         <tr><th>投稿者名</th><th>投稿記事</th></tr>
         <tr>
-             <td>{{$user_name}}</td> 
-            <td>{{$posted_item}}</td>
+             <td>{{$title}}</td> 
+            <td>{{$author}}</td>
+            <td>{{$publisher}}</td>
+            <td>{{$isbn}}</td>
         </tr>
     </table>
     <br>
