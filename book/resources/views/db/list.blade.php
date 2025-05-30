@@ -19,7 +19,7 @@
 
 <body>
     <h1>書籍一覧</h1>
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>タイトル</th>
@@ -29,13 +29,18 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($books as $book)
+            @foreach ($records as $book)
             <tr>
                 <!-- 本のタイトルをクリックすると詳細ページに遷移 -->
                 <td><a href="{{ route('db.detail', ['id' => $book->id]) }}">{{ $book->title }}</a></td>
                 <td>{{ $book->author }}</td>
                 <td>{{ $book->publisher }}</td>
                 <td>{{ $book->isbn }}</td>
+                <td>
+                    <a href="{{ route('db.detail', ['id' => $book->id]) }}" class="btn btn-sm btn-primary">
+                        詳細
+                    </a>
+                </td>
             </tr>
             @endforeach
 

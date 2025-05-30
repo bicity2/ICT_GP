@@ -26,35 +26,55 @@ class BookController extends Controller
         $article->isbn = $req->isbn;
         $article->save();
         $data = [
-            'title'=>$req->title,
-            'author'=>$req->author,
-            'publisher'=>$req->publisher,
-            'isbn'=>$req->isbn
+            'title' => $req->title,
+            'author' => $req->author,
+            'publisher' => $req->publisher,
+            'isbn' => $req->isbn
         ];
-        return view('db.add2',$data);
-}
+        return view('db.add2', $data);
+    }
     public function erase(Request $req)
     {
-        if($req->isMethod('get'))
+        if ($req->isMethod('get'))
             return view('db.erase');
-        elseif($req->isMethod('post'))
-        $id= $req->id;
-        $data= [
-            'record'=>Book::find($id)
+        elseif ($req->isMethod('post'))
+            $id = $req->id;
+        $data = [
+            'record' => Book::find($id)
         ];
-        return view('db.erase',$data);
+        return view('db.erase', $data);
     }
     public function erase2(Request $req)
     {
         $article = Book::find($req->id);
         $article->delete();
         $data = [
+<<<<<<< HEAD
             'id'=>$req->id,
             'title'=>$req->title,
             'author'=>$req->author,
             'publisher'=>$req->publisher,
             'isbn'=>$req->isbn
+=======
+            'id' => $req->id,
+            'user_name' => $req->user_name,
+            'posted_item' => $req->posted_item
+>>>>>>> 1a0d79a7a80609ce9f531952e0594a6bcfb529da
         ];
-        return view('db.erase2',$data);
-}
+        return view('db.erase2', $data);
+    }
+    public function list()
+    {
+        $data = [
+            'records' => Book::paginate(5)
+        ];
+        return view('db.list', $data);
+    }
+    public function detail(Request $req)
+    {
+        $data = [
+            'record' => Book::find($req->id)
+        ];
+        return view('db.detail', $data);
+    }
 }
