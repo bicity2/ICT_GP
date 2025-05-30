@@ -50,8 +50,12 @@
     </tr>
 
     <tr>
-      <td rowspan="3">マイグレーション<br>実行<br>
+      <td rowspan="4">マイグレーション<br>実行<br>
         （上から順番通りに）　</td>
+      <td colspan>php artisan migrate:reset</td>
+      <td>全てのマイグレーションを元に戻す。</td>
+    </tr>
+    <tr>
       <td colspan="2">php artisan migrate --path=database/migrations/2025_05_29_025928_create_books_table.php</td>
     </tr>
     <tr>
