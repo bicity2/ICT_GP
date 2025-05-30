@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->unsignedTinyInteger("user_name");
-            $table->unsignedTinyInteger("password");
+            $table->string("user_name");
+            $table->string("password");
             $table->string("department");
             $table->timestamps();
         });
