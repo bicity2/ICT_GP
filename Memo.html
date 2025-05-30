@@ -50,8 +50,13 @@
     </tr>
 
     <tr>
-      <td rowspan="4">マイグレーション<br>実行<br>
-        （上から順番通りに）　</td>
+      <td>★マイグレーション自動実行　</td>
+      <td>source script/migrate.sh</td>
+      <td>GitBashで実行する</td>
+    </tr>
+
+    <tr>
+      <td rowspan="4">マイグレーション<br>実行（上から順番通りに）　</td>
       <td colspan>php artisan migrate:reset</td>
       <td>全てのマイグレーションを元に戻す。</td>
     </tr>
@@ -70,6 +75,14 @@
       <td>php artisan make:seeder</td>
       <td>末尾に [ XxxxTableSeeder ] 先頭大文字</td>
     </tr>
+
+    <font color:red>
+      <tr>
+        <td>★シーダ実行実行　</td>
+        <td>source script/seeder.sh</td>
+        <td>GitBashで実行する</td>
+      </tr>
+    </font>
 
     <tr>
       <td>シーダ実行　</td>
