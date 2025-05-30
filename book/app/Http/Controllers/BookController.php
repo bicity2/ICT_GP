@@ -34,13 +34,13 @@ class BookController extends Controller
         elseif($req->isMethod('post'))
         $id= $req->id;
         $data= [
-            'record'=>Article::find($id)
+            'record'=>Book::find($id)
         ];
         return view('db.erase',$data);
     }
     public function erase2(Request $req)
     {
-        $article = Article::find($req->id);
+        $article = Book::find($req->id);
         $article->delete();
         $data = [
             'id'=>$req->id,
