@@ -17,7 +17,7 @@
         <li><a href="/db/erase">書籍の削除</a></li>
     </ul>
     <br>
-    <form method="POST" action="{{ route('logout') }}">
+    <form action="/db/logout" method="POST">
         @csrf
         <button type="submit" class="btn btn-link p-0">ログアウト</button>
     </form>

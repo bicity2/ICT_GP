@@ -59,7 +59,7 @@ class BookController extends Controller
             'id' => $req->id,
             'user_name' => $req->user_name,
             'posted_item' => $req->posted_item
->>>>>>> 1a0d79a7a80609ce9f531952e0594a6bcfb529da
+>>>>>>> 0abcad101c67a040263b9873707f828ec3dcf248
         ];
         return view('db.erase2', $data);
     }
