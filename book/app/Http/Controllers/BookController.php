@@ -7,6 +7,12 @@ use App\Models\Book;
 
 class BookController extends Controller
 {
+    public function index()
+    {
+        $books = Book::all(); // すべての本を取得
+        return view('index', compact('books'));
+    }
+    
     public function add()
     {
         return view('db.add');
@@ -44,8 +50,10 @@ class BookController extends Controller
         $article->delete();
         $data = [
             'id'=>$req->id,
-            'user_name'=>$req->user_name,
-            'posted_item'=>$req->posted_item
+            'title'=>$req->title,
+            'author'=>$req->author,
+            'publisher'=>$req->publisher,
+            'isbn'=>$req->isbn
         ];
         return view('db.erase2',$data);
 }

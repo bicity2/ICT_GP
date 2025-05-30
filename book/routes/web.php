@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 Route::get('/', function () {
-    return view('/index');
+    return view('db/erase');
 });
-Route::get('/db/index', [BookController::class,'index']);
+Route::get('/index', [BookController::class,'index']);
 
 Route::get('/db/add', [BookController::class,'add']);
 Route::post('/db/add2', [BookController::class,'add2']);
