@@ -49,17 +49,11 @@ class BookController extends Controller
         $article = Book::find($req->id);
         $article->delete();
         $data = [
-<<<<<<< HEAD
             'id'=>$req->id,
             'title'=>$req->title,
             'author'=>$req->author,
             'publisher'=>$req->publisher,
             'isbn'=>$req->isbn
-=======
-            'id' => $req->id,
-            'user_name' => $req->user_name,
-            'posted_item' => $req->posted_item
->>>>>>> 1a0d79a7a80609ce9f531952e0594a6bcfb529da
         ];
         return view('db.erase2', $data);
     }
