@@ -12,7 +12,7 @@
     <table class="table">
         <tr><th>投稿者名</th><th>投稿記事</th></tr>
         <tr>
-             <td>{{$title}}</td> 
+            <td>{{$title}}</td>
             <td>{{$author}}</td>
             <td>{{$publisher}}</td>
             <td>{{$isbn}}</td>
@@ -20,7 +20,7 @@
     </table>
     <br>
     <a href="/">トップページに戻る</a>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
-     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>

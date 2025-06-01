@@ -6,8 +6,8 @@
     <title>書籍削除画面</title>
 </head>
 <body>
- <h1>データの削除</h1>  
- @if(isset($record))
+  <h1>データの削除</h1>
+  @if(isset($record))
     <form action="/db/erase2" method="post">
         @csrf
         <input type="hidden" name="id"value="{{$record->id}}"readonly><br>
@@ -21,11 +21,11 @@
         <a href="/index">トップページに戻る</a>
     </form>
   @else 
-   <form action="/db/erase" method="post">
+    <form action="/db/erase" method="post">
         @csrf
         投稿番号<input type="number" name="id"required>
         <input type="submit" value="データ表示">
-   </form>
+    </form>
   @endif
 </body>
 </html>
