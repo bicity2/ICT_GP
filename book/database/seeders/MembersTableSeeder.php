@@ -15,53 +15,53 @@ class MembersTableSeeder extends Seeder
         DB::table('members')->insert([
             [
                 'user_name' => 'ippan',
-                'password' => 1,
-                'department' => '一般',
+                'password' =>Hash::make('1'),
+                'department' => 'ippan',
             ],
             [
                 'user_name' => 'soumu',
-                'password' => 2,
-                'department' => '総務部',
+                'password' =>Hash::make('2'),
+                'department' => 'soumu',
             ],
             [
                 'user_name' => 'tanaka',
-                'password' => 3,
-                'department' => '一般',
+                'password' =>Hash::make('3'),
+                'department' => 'ippan',
             ],
             [
                 'user_name' => 'suzuki',
-                'password' => 4,
-                'department' => '総務部',
+                'password' =>Hash::make('4'),
+                'department' => 'soumu',
             ],
             [
                 'user_name' => 'kobayashi',
-                'password' => 5,
-                'department' => '一般',
+                'password' =>Hash::make('5'),
+                'department' => 'ippan',
             ],
             [
                 'user_name' => 'nakamura',
-                'password' => 6,
-                'department' => '総務部',
+                'password' =>Hash::make('6'),
+                'department' => 'soumu',
             ],
             [
                 'user_name' => 'kato',
-                'password' => 7,
-                'department' => '一般',
+                'password' =>Hash::make('7'),
+                'department' => 'ippan',
             ],
             [
                 'user_name' => 'yoshida',
-                'password' => 8,
-                'department' => '総務部',
+                'password' =>Hash::make('8'),
+                'department' => 'soumu',
             ],
             [
                 'user_name' => 'yamaguchi',
-                'password' => 9,
-                'department' => '一般',
+                'password' =>Hash::make('9'),
+                'department' => 'ippan',
             ],
             [
                 'user_name' => 'matsumoto',
-                'password' => 0,
-                'department' => '総務部',
+                'password' =>Hash::make('10'),
+                'department' => 'soumu',
             ],
         ]);
     }
