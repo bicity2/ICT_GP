@@ -40,3 +40,7 @@ Route::post('/db/erase2', [BookController::class,'erase2']);
 Route::get('/db/list', [BookController::class,'list']);
 Route::get('/db/detail', [BookController::class,'detail'])->name('db.detail');
 Route::post('/db/comment_input', [ReviewController::class,'comment_input']);
+
+
+Route::get('/db/addWithBarcode', [BookController::class, 'addWithBarcode'])->name('db.addWithBarcode');
+Route::get('/db/addCheck/{isbn}', [BookController::class, 'addCheck'])->name('db.addCheck');
