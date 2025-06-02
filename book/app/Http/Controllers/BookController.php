@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use App\Models\Book;
 
 class BookController extends Controller
@@ -71,4 +72,42 @@ class BookController extends Controller
         ];
         return view('db.detail', $data);
     }
+    public function register(Request $request)
+    {
+        $book = new Book();
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->isbn = $request->isbn;
+        $book->save();
+
+        return response()->json(['status' => 'ok']);
+    }
+     public function addWithBarcode()
+        {
+            return view('db.addWithBarcode');
+        }
+    
+    public function addCheck(Request $request)
+    {
+        return view('db.addCheck', compact('isbn'));
+        // バリデーション
+        $validated = $request->validate([
+            'title'  => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'isbn'   => 'required|string|size:13|unique:books,isbn',
+        ]);
+    
+   
+    Book::create([
+        'title' => $request->title,
+        'author' => $request->author,
+        'isbn' => $request->isbn,
+    ]);
+    $isbn = $request->isbn;
+    return view('db.addCheck', compact('isbn'));
+
+
+    return response()->json(['message' => '登録成功']);
+
+    } 
 }
