@@ -11,6 +11,16 @@ Route::get('/', function () {
     return view('index');
 });
 
+
+/**
+ * DEBUG A 1/2 -->>
+ * Route::get('/login', [MemberController::class, 'showLogin'])->name('login');
+ * Route::post('/login', [MemberController::class, 'login'])->name('login.process');
+ * 
+ * Route::middleware(['auth'])->group(function () {
+ * <<-- DEBUG A 1/2
+ */
+
 /* Menu */
 Route::get('/index', [BookController::class,'index']);
 Route::get('/db/soumu',[MemberController::class,'soumu']);
@@ -41,3 +51,9 @@ Route::post('/db/comment_input', [ReviewController::class,'comment_input']);
 
 Route::get('/db/addWithBarcode', [BookController::class, 'addWithBarcode'])->name('db.addWithBarcode');
 Route::get('/db/addCheck/{isbn}', [BookController::class, 'addCheck'])->name('db.addCheck');
+
+/**
+ * DEBUG A 2/2 -->>
+ * });
+ * <<-- DEBUG A 2/2
+ */
