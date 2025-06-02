@@ -26,7 +26,7 @@
   <form action="{{ route('login.process') }}" method="post">
     @csrf
     <label for="userid">ID:</label>
-    <input type="text" name="userid" id="userid" required><br><br>
+    <input type="text" name="user_name" id="user_name" required><br><br>
 
     <label for="password">パスワード:</label>
     <input type="password" name="password" id="password" required><br><br>

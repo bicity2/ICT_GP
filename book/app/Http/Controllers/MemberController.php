@@ -19,7 +19,6 @@ class MemberController extends Controller
         if(Auth::guard('member')->attempt($credentials)){
             $user=Auth::guard('member')->user();
 
-            //departmentによって遷移先を変更
             if($user->department ==='soumu'){
                 return redirect('/db/soumu');//総務向けメニュー
             }else{
@@ -72,5 +71,10 @@ class MemberController extends Controller
     public function soumu(Request $req)
     {
         return view('db.soumu');
+    }
+
+    public function normal(Request $req)
+    {
+        return view('db.normal');
     }
 }
