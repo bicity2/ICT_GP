@@ -15,7 +15,7 @@
     <li><a href="/db/list/">書籍一覧</a></li>
     </ul>
     <br>
-    <form method="POST" action="{{ route('logout') }}">
+    <form action="/db/logout" method="POST">
         @csrf
         <button type="submit" class="btn btn-link p-0">ログアウト</button>
     </form>

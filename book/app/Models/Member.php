@@ -16,4 +16,9 @@ class Member extends Authenticatable
     {
         return $this->hasMany(Review::class);
     }
+
+    public function getAuthIdentifierName()
+    {
+        return 'user_name';
+    }
 }
