@@ -13,11 +13,12 @@ class BookController extends Controller
         $books = Book::all(); // すべての本を取得
         return view('index', compact('books'));
     }
-    
+
     public function add()
     {
         return view('db.add');
     }
+
     public function add2(Request $req)
     {
         $article = new Book();
@@ -34,6 +35,7 @@ class BookController extends Controller
         ];
         return view('db.add2', $data);
     }
+
     public function erase(Request $req)
     {
         if ($req->isMethod('get'))
@@ -45,6 +47,7 @@ class BookController extends Controller
         ];
         return view('db.erase', $data);
     }
+
     public function erase2(Request $req)
     {
         $article = Book::find($req->id);
@@ -58,6 +61,7 @@ class BookController extends Controller
         ];
         return view('db.erase2', $data);
     }
+
     public function list()
     {
         $data = [
@@ -65,6 +69,7 @@ class BookController extends Controller
         ];
         return view('db.list', $data);
     }
+
     public function detail(Request $req)
     {
         $data = [
@@ -72,11 +77,7 @@ class BookController extends Controller
         ];
         return view('db.detail', $data);
     }
-<<<<<<< HEAD
 
-    }
-
-=======
     public function register(Request $request)
     {
         $book = new Book();
@@ -87,13 +88,15 @@ class BookController extends Controller
 
         return response()->json(['status' => 'ok']);
     }
-     public function addWithBarcode()
-        {
-            return view('db.addWithBarcode');
-        }
-    
+
+    public function addWithBarcode()
+    {
+        return view('db.addWithBarcode');
+    }
+
     public function addCheck(Request $request)
     {
+        // [Check] some action is under return, action should be above return
         return view('db.addCheck', compact('isbn'));
         // バリデーション
         $validated = $request->validate([
@@ -101,19 +104,17 @@ class BookController extends Controller
             'author' => 'required|string|max:255',
             'isbn'   => 'required|string|size:13|unique:books,isbn',
         ]);
-    
-   
-    Book::create([
-        'title' => $request->title,
-        'author' => $request->author,
-        'isbn' => $request->isbn,
-    ]);
-    $isbn = $request->isbn;
-    return view('db.addCheck', compact('isbn'));
 
+        Book::create([
+            'title' => $request->title,
+            'author' => $request->author,
+            'isbn' => $request->isbn,
+        ]);
+        $isbn = $request->isbn;
 
-    return response()->json(['message' => '登録成功']);
+        // [Check] return is two, which should be one
+        return view('db.addCheck', compact('isbn'));
+        return response()->json(['message' => '登録成功']);
+    }
 
-    } 
 }
->>>>>>> 4156c02488012ab8746686780be0170ebe94c546
