@@ -67,7 +67,7 @@ class MemberController extends Controller
         Auth::guard('member')->logout();
         $req->session()->invalidate();
         $req->session()->regenerateToken();
-        return redirect('/');
+        return view('db.logout');
     }
     public function soumu(Request $req)
     {

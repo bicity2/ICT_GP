@@ -71,4 +71,6 @@ class BookController extends Controller
         ];
         return view('db.detail', $data);
     }
-}
+
+    }
+
