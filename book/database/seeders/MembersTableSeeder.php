@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class MembersTableSeeder extends Seeder
 {
@@ -12,55 +13,62 @@ class MembersTableSeeder extends Seeder
      */
     public function run(): void
     {
+        /**
+         * Delete members 
+         */
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('members')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         DB::table('members')->insert([
             [
                 'user_name' => 'ippan',
-                'password' =>Hash::make('1'),
+                'password' =>Hash::make(1),
                 'department' => 'ippan',
             ],
             [
                 'user_name' => 'soumu',
-                'password' =>Hash::make('2'),
+                'password' =>Hash::make(2),
                 'department' => 'soumu',
             ],
             [
                 'user_name' => 'tanaka',
-                'password' =>Hash::make('3'),
+                'password' =>Hash::make(3),
                 'department' => 'ippan',
             ],
             [
                 'user_name' => 'suzuki',
-                'password' =>Hash::make('4'),
+                'password' =>Hash::make(4),
                 'department' => 'soumu',
             ],
             [
                 'user_name' => 'kobayashi',
-                'password' =>Hash::make('5'),
+                'password' =>Hash::make(5),
                 'department' => 'ippan',
             ],
             [
                 'user_name' => 'nakamura',
-                'password' =>Hash::make('6'),
+                'password' =>Hash::make(6),
                 'department' => 'soumu',
             ],
             [
                 'user_name' => 'kato',
-                'password' =>Hash::make('7'),
+                'password' =>Hash::make(7),
                 'department' => 'ippan',
             ],
             [
                 'user_name' => 'yoshida',
-                'password' =>Hash::make('8'),
+                'password' =>Hash::make(8),
                 'department' => 'soumu',
             ],
             [
                 'user_name' => 'yamaguchi',
-                'password' =>Hash::make('9'),
+                'password' =>Hash::make(9),
                 'department' => 'ippan',
             ],
             [
                 'user_name' => 'matsumoto',
-                'password' =>Hash::make('10'),
+                'password' =>Hash::make(10),
                 'department' => 'soumu',
             ],
         ]);
