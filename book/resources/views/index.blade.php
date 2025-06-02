@@ -23,7 +23,7 @@
   @endif
 
   <!-- TODO -->
-  <form action="/db/soumu" method="get">
+  <form action="{{ route('login.process') }}" method="post">
     @csrf
     <label for="userid">ID:</label>
     <input type="text" name="userid" id="userid" required><br><br>

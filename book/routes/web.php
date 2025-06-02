@@ -13,6 +13,8 @@ Route::get('/', function () {
 Route::get('/index', [BookController::class,'index']);
 Route::get('/db/soumu',[MemberController::class,'soumu']);
 Route::get('/db/index', [BookController::class,'index']);
+//Route::get('/', [MemberController::class, 'showLogin'])->name('login');
+Route::post('/login', [MemberController::class, 'login'])->name('login.process');
 //Route::post('/db/login',[MemberController::class,'login']);
 
 /* Add Book */

@@ -30,6 +30,38 @@ class MemberController extends Controller
             'user_name'=>'IDまたはパスワードが正しくありません'
         ]);   
     }
+    // public function soumuMenu()
+    // {
+    //     return view('soumu');
+    // }
+
+    // public function normalMenu()
+    // {
+    //     return view('normal');
+    // }
+
+    // public function listBooks()
+    // {
+    //     $books = Book::all();
+    //     return view('book_list', compact('books'));
+    // }
+
+    // public function showAddForm()
+    // {
+    //     return view('book_create');
+    // }
+
+    // public function store(Request $req)
+    // {
+    //     Book::create($req->only('isbn', 'title', 'author'));
+    //     return redirect('/db/soumu');
+    // }
+
+    // public function delete($id)
+    // {
+    //     Book::destroy($id);
+    //     return redirect('/db/soumu');
+    // }
     public function logout(Request $req)
     {
         Auth::guard('member')->logout();

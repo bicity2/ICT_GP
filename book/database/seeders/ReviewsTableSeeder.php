@@ -12,6 +12,14 @@ class ReviewsTableSeeder extends Seeder
      */
     public function run(): void
     {
+        /**
+         * Delete reviews
+         */
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('reviews')->truncate(); // 既存データ削除
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+
         // サンプルコメント
         $comments = [
             'とても面白かったです！',
