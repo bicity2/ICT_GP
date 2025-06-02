@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>書籍情報確認</title>
+  <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}">
 </head>
 <body>
   <h1>書籍情報</h1>

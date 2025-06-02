@@ -1,0 +1,134 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* 全体レイアウト */
+body {
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  /* font-family: sans-serif; */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ページをヘッダー、メイン、フッターに分割 */
+.content {
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.page-footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  flex-shrink: 0;
+}
+
+
+/* 共通コンテナ */
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ボタン共通 */
+.button {
+  background-color: #4a90e2;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+  transition: background-color 0.3s;
+}
+
+/* 特定ボタンのパラメータ指定 */
+.button-group {
+  display: flex;
+  flex-direction: column; /* 縦並び */
+  padding: 60px;
+  margin: 60px;
+  gap: 10px; /* ボタン間の隙間 */
+}
+
+.button:hover {
+  background-color: #357abd;
+}
+
+/* 入力フォームタイトル */
+.form-label
+{
+  margin: 10px 50px 0px 50px;
+}
+/* 入力フォーム */
+input[type="text"],
+input[type="password"],
+input[type="number"],
+textarea {
+  width: 400px;
+  padding: 10px;
+  margin: 0px 50px 10px 50px;
+  /*margin-top: 8px;
+  margin-bottom: 20px;*/
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+input[type="submit"]
+{
+  width: 400px;
+  padding: 10px;
+  margin: 20px 50px;
+  /*margin-top: 8px;
+  margin-bottom: 20px;*/
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+
+/* フォームを中央揃え */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 見出し */
+h1, h2 {
+  color: #2c3e50;
+  border-bottom: 2px solid #4a90e2;
+  padding: 10px;
+  margin: 20px 50px 60px 50px;
+}
+
+/* フォームラッパー */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px; /* フォームと画像の間の余白 */
+  margin-top: 30px;
+}
+
+/* GIF画像のサイズ */
+.side-image {
+  width: 400px;
+  height: auto;
+  padding: 10px;
+  margin: 20px;
+}
