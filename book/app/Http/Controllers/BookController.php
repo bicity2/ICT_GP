@@ -19,7 +19,7 @@ class BookController extends Controller
         return view('db.add');
     }
 
-    public function add2(Request $req)
+    public function addDone(Request $req)
     {
         $article = new Book();
         $article->title = $req->title;
@@ -33,7 +33,7 @@ class BookController extends Controller
             'publisher' => $req->publisher,
             'isbn' => $req->isbn
         ];
-        return view('db.add2', $data);
+        return view('db.addDone', $data);
     }
 
     public function erase(Request $req)
@@ -48,7 +48,7 @@ class BookController extends Controller
         return view('db.erase', $data);
     }
 
-    public function erase2(Request $req)
+    public function eraseDone(Request $req)
     {
         $article = Book::find($req->id);
         $article->delete();
@@ -59,7 +59,7 @@ class BookController extends Controller
             'publisher'=>$req->publisher,
             'isbn'=>$req->isbn
         ];
-        return view('db.erase2', $data);
+        return view('db.eraseDone', $data);
     }
 
     public function list()

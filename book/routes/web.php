@@ -36,12 +36,12 @@ Route::post('/login', [MemberController::class, 'login'])->name('login.process')
 
 /* Add Book */
 Route::get('/db/add', [BookController::class,'add']);
-Route::post('/db/add2', [BookController::class,'add2']);
+Route::post('/db/addDone', [BookController::class,'addDone']);
 
 /* Delete Book */
 Route::get('/db/erase', [BookController::class,'erase']);
 Route::post('/db/erase', [BookController::class,'erase']);
-Route::post('/db/erase2', [BookController::class,'erase2']);
+Route::post('/db/eraseDone', [BookController::class,'eraseDone']);
 
 /* Book List */
 Route::get('/db/list', [BookController::class,'list']);

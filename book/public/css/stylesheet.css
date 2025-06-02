@@ -19,8 +19,12 @@ body {
 
 /* ページをヘッダー、メイン、フッターに分割 */
 .content {
-  flex-grow: 1;
+  flex: 1;
   min-height: 0;
+}
+
+main.content {
+    flex: 1;
 }
 
 .page-footer {

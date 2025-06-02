@@ -11,7 +11,7 @@
 <body>
     {{-- TODO --}}
     <h1>書籍登録</h1>
-        <form action="/db/add2" method="post">
+        <form action="/db/addDone" method="post">
             @csrf
             <button type="submit">送信</button>
         </form>

@@ -17,7 +17,7 @@ class BookController extends Controller
     {
         return view('db.add');
     }
-    public function add2(Request $req)
+    public function addDone(Request $req)
     {
         $article = new Book();
         $article->title = $req->title;
@@ -31,7 +31,7 @@ class BookController extends Controller
             'publisher' => $req->publisher,
             'isbn' => $req->isbn
         ];
-        return view('db.add2', $data);
+        return view('db.addDone', $data);
     }
     public function erase(Request $req)
     {
