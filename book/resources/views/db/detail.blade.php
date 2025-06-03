@@ -32,7 +32,7 @@
         .right {
             flex: 1;
             padding: 16px;
-  
+
         }
 
         /* コメント間の余白を大きくする */
@@ -80,6 +80,10 @@
         <div class="right">
 
             <h2>コメント</h2>
+
+            @php
+            $user_id = Auth::id(); // 仮のユーザーID
+            @endphp
             <div class="book-details bg-light p-4 rounded shadow-sm mb-4" style="max-height: 700px; overflow-y: auto;">
                 <ul class="list-group">
                     @foreach($comments as $comment)
@@ -102,6 +106,17 @@
                             <div>
                                 <span class="fw-bold">{!! nl2br(e($comment->comment)) !!}</span>
                             </div>
+
+                            <!-- 自分のコメントなら削除ボタンを表示 -->
+                            @if($comment->user_id == $user_id)
+                            <div style="display: flex; justify-content: flex-end; margin-top: 8px;">
+                                <form action="{{ route('db.comment_delete', ['id' => $comment->id, 'book_id' => $record->isbn]) }}" method="POST" style="margin: 0;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">コメント削除</button>
+                                </form>
+                            </div>
+                            @endif
                         </div>
                     </li>
                     @endforeach

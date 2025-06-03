@@ -55,6 +55,7 @@ Route::get('/db/list', [BookController::class, 'list']);
 Route::get('/db/detail', [BookController::class, 'detail'])->name('db.detail');
 Route::get('/db/comment_input', [ReviewController::class, 'comment_input'])->name('db.comment_input');
 Route::post('/db/comment_store', [ReviewController::class, 'store'])->name('db.comment_store');
+Route::delete('/db/comment_delete/{id}', [ReviewController::class, 'destroy'])->name('db.comment_delete');
 
 Route::get('/db/addWithBarcode', [BookController::class, 'addWithBarcode'])->name('db.addWithBarcode');
 Route::get('/db/addCheck/{isbn}', [BookController::class, 'addCheck'])->name('db.addCheck');

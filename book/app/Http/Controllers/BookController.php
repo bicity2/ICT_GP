@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Book;
 use App\Models\Review;
 
+
 class BookController extends Controller
 {
     public function index()
@@ -175,6 +176,4 @@ class BookController extends Controller
         'publisher'=>'書籍情報なし',
     ];
     }
-}
-
 }
