@@ -10,7 +10,7 @@ use App\Http\Controllers\LoginController;
 
 // Route::get('/', [BookController::class, 'list']);
 Route::get('/', function () {
-    return view('db/soumu');
+    return view('index');
 });
 
 Route::get('/db/selectHowToAdd', function () {
