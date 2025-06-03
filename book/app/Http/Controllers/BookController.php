@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Book;
+use App\Models\Review;
 
 class BookController extends Controller
 {
@@ -53,11 +54,11 @@ class BookController extends Controller
         $article = Book::find($req->id);
         $article->delete();
         $data = [
-            'id'=>$req->id,
-            'title'=>$req->title,
-            'author'=>$req->author,
-            'publisher'=>$req->publisher,
-            'isbn'=>$req->isbn
+            'id' => $req->id,
+            'title' => $req->title,
+            'author' => $req->author,
+            'publisher' => $req->publisher,
+            'isbn' => $req->isbn
         ];
         return view('db.eraseDone', $data);
     }
@@ -72,8 +73,32 @@ class BookController extends Controller
 
     public function detail(Request $req)
     {
+        // 13桁ならISBN、それ以外はidとみなす（必要に応じて調整）
+        if (is_numeric($req->id) && strlen($req->id) < 13) {
+            $book = Book::find($req->id);
+        } else {
+            $book = Book::where('isbn', $req->id)->first();
+        }
+        if (!$book) {
+            abort(404, '書籍が見つかりません');
+        }
+        $comments = Review::where('book_id', $book->isbn)->get();
+
+        // 自分のコメントを一番上に
+        $user_id = 1; // 仮のユーザーID
+        $comments = $comments->sortByDesc(function ($comment) use ($user_id) {
+            return $comment->user_id == $user_id ? 1 : 0;
+        })->values();
+
+        // 評価の平均値を計算
+        $average = $comments->avg('rating');
+        // 小数第1位まで表示したい場合
+        $average = $average ? round($average, 1) : 0;
+
         $data = [
-            'record' => Book::find($req->id)
+            'record' => $book,
+            'comments' => $comments,
+            'average' => $average,
         ];
         return view('db.detail', $data);
     }
@@ -116,5 +141,4 @@ class BookController extends Controller
         return view('db.addCheck', compact('isbn'));
         return response()->json(['message' => '登録成功']);
     }
-
 }

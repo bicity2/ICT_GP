@@ -11,33 +11,36 @@
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
         crossorigin="anonymous">
     <style>
-        body {
+        /* body {
             width: 800px;
             margin: 10px auto;
-        }
+        } */
     </style>
 </head>
 
 <body>
     <h1>コメント投稿フォーム</h1>
-    <form action="submit_comment.php" method="post">
-        <label>名前:
-            <input type="text" name="name" required>
-        </label><br><br>
+    <div class="d-flex justify-content-start align-items-center" style="margin-top: 16px; margin-left: 16px;">
+    <a href="{{ route('db.detail', ['id' => $book_id]) }}" class="btn btn-secondary">書籍詳細ページへ戻る</a>
+</div>
+    <form action="{{ route('db.comment_store') }}" method="post">
+        @csrf
+        <input type="hidden" name="book_id" value="{{ $book_id ?? $id ?? '' }}">
+
         <label>コメント:<br>
-            <textarea name="comment" rows="5" cols="40" required></textarea>
+            <textarea name="comment" rows="5" cols="40" required>{{ old('comment', $review->comment ?? '') }}</textarea>
         </label><br><br>
-        <label>おすすめ度:
-            <select name="rating" required>
+        <label>評価：
+            <select name="rating" required style="font-size:1.2em;">
                 <option value="">選択してください</option>
-                <option value="1">1 - ★</option>
-                <option value="2">2 - ★★</option>
-                <option value="3">3 - ★★★</option>
-                <option value="4">4 - ★★★★</option>
-                <option value="5">5 - ★★★★★</option>
+                @for ($i = 1; $i <= 5; $i++)
+                    <option value="{{ $i }}" {{ (old('rating', $review->rating ?? '') == $i) ? 'selected' : '' }}>
+                    {{ $i }} - {{ str_repeat('★', $i) }}
+                    </option>
+                    @endfor
             </select>
         </label><br><br>
-        <button type="submit">投稿</button>
+        <button type="submit" class="btn btn-primary">投稿する</button>
     </form>
 </body>
 

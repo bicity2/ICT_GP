@@ -9,21 +9,20 @@
         rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
         crossorigin="anonymous">
-    <style>
-        body {
-            width: 800px;
-            margin: 10px auto;
-        }
-    </style>
-    <title>Document</title>
+  
+    <title>書籍一覧</title>
 </head>
 
 <body>
-    <h1 style="text-align: center;">書籍一覧</h1>
-    <hr>
+    <h1>書籍一覧</h1>
+     <div class="d-flex justify-content-start align-items-center" style="margin-top: 16px; margin-left: 16px;">
+        <a href="{{ url('/') }}" class="btn btn-secondary">トップページに戻る</a>
+    </div>
+  <br><br>
     <table class="table">
         <thead>
             <tr>
+                <th>投稿番号</th>
                 <th>タイトル</th>
                 <th>著者</th>
                 <th>出版社</th>
@@ -33,6 +32,8 @@
         <tbody>
             @foreach ($records as $book)
             <tr>
+                <!-- 投稿番号を表示 -->
+                <td>{{ $book->id }}</td>
                 <!-- 本のタイトルをクリックすると詳細ページに遷移 -->
                 <td><a href="{{ route('db.detail', ['id' => $book->id]) }}">{{ $book->title }}</a></td>
                 <td>{{ $book->author }}</td>
