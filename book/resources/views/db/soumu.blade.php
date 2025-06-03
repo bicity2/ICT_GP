@@ -12,6 +12,6 @@
             <a href="/db/add/" class="btn btn-success mb-2">書籍の新規登録</a>
             <a href="/db/erase" class="btn btn-danger mb-2">書籍の削除</a>
         </div>
-        {{-- <img src="{{ asset('images/angry.gif') }}" alt="装飾画像" class="side-image"> --}}
+        <img src="{{ asset('images/angry.gif') }}" alt="装飾画像" class="side-image">
     </div>
 @endsection
