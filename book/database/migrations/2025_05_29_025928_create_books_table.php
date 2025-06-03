@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string("title");
             $table->string("author");
             $table->string("publisher");
-            $table->string("isbn", 20)->unique();
+            $table->string("isbn", 20);
+            $table->unsignedInteger("stock")->default(1);//整数でデフォルト値を持たせる
             $table->timestamps();
         });
     }
@@ -29,3 +30,4 @@ return new class extends Migration
         Schema::dropIfExists('books');
     }
 };
+ 

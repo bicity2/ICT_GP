@@ -20,9 +20,9 @@ return new class extends Migration
             $table->timestamps();
 
             // 外部キー制約の設定 p159
-            $table->foreign('book_id')
-                    ->references('isbn')->on('books')
-                    ->onDelete('cascade');
+            // $table->foreign('book_id')
+            //         ->references('isbn')->on('books')
+            //         ->onDelete('cascade');
 
             $table->foreign('user_id')
                     ->references('id')->on('members');
