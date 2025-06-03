@@ -1,0 +1,254 @@
+diff --git a/book/app/Http/Controllers/BookController.php b/book/app/Http/Controllers/BookController.php
+index 47e9afd..ed8b087 100644
+--- a/book/app/Http/Controllers/BookController.php
++++ b/book/app/Http/Controllers/BookController.php
+@@ -4,6 +4,7 @@
+ 
+ use Illuminate\Http\Request;
+ use Illuminate\Support\Facades\Http;
++use Illuminate\Support\Facades\Auth;
+ use App\Models\Book;
+ use App\Models\Review;
+ 
+@@ -24,11 +25,11 @@ public function add()
+     public function addDone(Request $req)
+     {
+         $req->validate([
+-        'title' => 'required|string|max:255',
+-        'author' => 'required|string|max:255',
+-        'publisher' => 'required|string|max:255',
+-        'isbn' => 'required|string|size:13|unique:books,isbn',
+-    ]);
++            'title' => 'required|string|max:255',
++            'author' => 'required|string|max:255',
++            'publisher' => 'required|string|max:255',
++            'isbn' => 'required|string|size:13|unique:books,isbn',
++        ]);
+         $article = new Book();
+         $article->title = $req->title;
+         $article->author = $req->author;
+@@ -89,10 +90,12 @@ public function detail(Request $req)
+         if (!$book) {
+             abort(404, '書籍が見つかりません');
+         }
+-        $comments = Review::where('book_id', $book->isbn)->get();
++        $comments = Review::where('book_id', $book->isbn)
++            ->with('member') // ←リレーションをEagerロード
++            ->get();
+ 
+         // 自分のコメントを一番上に
+-        $user_id = 1; // 仮のユーザーID
++        $user_id = Auth::guard('member')->id(); // 仮のユーザーID
+         $comments = $comments->sortByDesc(function ($comment) use ($user_id) {
+             return $comment->user_id == $user_id ? 1 : 0;
+         })->values();
+@@ -111,69 +114,69 @@ public function detail(Request $req)
+     }
+ 
+     public function register(Request $request)
+-{
+-    // バリデーション（任意だが推奨）
+-    $request->validate([
+-        'title' => 'required|string|max:255',
+-        'author' => 'required|string|max:255',
+-        'isbn' => 'required|string|size:13|unique:books,isbn',
+-    ]);
+-
+-    // 登録（1回で十分）
+-    Book::create([
+-        'title' => $request->title,
+-        'author' => $request->author,
+-        'isbn' => $request->isbn,
+-    ]);
+-
+-    
+-    return redirect()->route('books.index')->with('message', '登録が完了しました');
+-}
++    {
++        // バリデーション（任意だが推奨）
++        $request->validate([
++            'title' => 'required|string|max:255',
++            'author' => 'required|string|max:255',
++            'isbn' => 'required|string|size:13|unique:books,isbn',
++        ]);
++
++        // 登録（1回で十分）
++        Book::create([
++            'title' => $request->title,
++            'author' => $request->author,
++            'isbn' => $request->isbn,
++        ]);
++
++
++        return redirect()->route('books.index')->with('message', '登録が完了しました');
++    }
+ 
+     public function addWithBarcode()
+     {
+-    return view('db.addWithBarcode');
++        return view('db.addWithBarcode');
+     }
+ 
+     public function addCheck($isbn)
+     {
+-    $bookInfo = $this->fetchBookInfoByISBN($isbn);
+-
+-    return view('db.addCheck', [
+-        'title' => $bookInfo['title'],
+-        'author' => $bookInfo['author'],
+-        'isbn13' => $isbn,
+-        'publisher' =>$bookInfo['publisher'] ?? '不明',
+-    ]);
++        $bookInfo = $this->fetchBookInfoByISBN($isbn);
++
++        return view('db.addCheck', [
++            'title' => $bookInfo['title'],
++            'author' => $bookInfo['author'],
++            'isbn13' => $isbn,
++            'publisher' => $bookInfo['publisher'] ?? '不明',
++        ]);
+     }
+     //書籍データAPIから「本のタイトル」と「著者名」を取得するためのメソッド
+     private function fetchBookInfoByISBN($isbn)
+     {
+-    $url = "https://api.openbd.jp/v1/get?isbn={$isbn}";
+-    $response = Http::get($url);
++        $url = "https://api.openbd.jp/v1/get?isbn={$isbn}";
++        $response = Http::get($url);
++
++        if ($response->failed() || empty($response[0])) {
++            return [
++                'title' => '取得失敗',
++                'author' => '取得失敗',
++                'publisher' => '取得失敗',
++            ];
++        }
+ 
+-    if ($response->failed()|| empty($response[0])) {
+-        return [
+-            'title' => '取得失敗',
+-            'author' => '取得失敗',
+-            'publisher'=>'取得失敗',
+-        ];
+-    }
++        $data = $response[0]['summary'] ?? null;
+ 
+-     $data = $response[0]['summary'] ?? null;
++        if ($data) {
++            return [
++                'title' => $data['title'] ?? '不明',
++                'author' => $data['author'] ?? '不明',
++                'publisher' => $data['publisher'] ?? '不明',
++            ];
++        }
+ 
+-    if ($data) {
+         return [
+-            'title' => $data['title'] ?? '不明',
+-            'author' => $data['author'] ?? '不明',
+-            'publisher'=>$data['publisher'] ?? '不明',
++            'title' => '書籍情報なし',
++            'author' => '書籍情報なし',
++            'publisher' => '書籍情報なし',
+         ];
+     }
+-
+-    return [
+-        'title' => '書籍情報なし',
+-        'author' => '書籍情報なし',
+-        'publisher'=>'書籍情報なし',
+-    ];
+-    }
+ }
+diff --git a/book/app/Http/Controllers/ReviewController.php b/book/app/Http/Controllers/ReviewController.php
+index a05624f..5e30a9a 100644
+--- a/book/app/Http/Controllers/ReviewController.php
++++ b/book/app/Http/Controllers/ReviewController.php
+@@ -10,7 +10,7 @@ class ReviewController extends Controller
+ {
+     public function comment_input(Request $req)
+     {
+-        $user_id = Auth::id();
++        $user_id = Auth::guard('member')->id();
+         // $user_id = 1; // 仮のユーザーID
+         // 既存のレビューを取得（book_idはISBNの場合もあるので注意）
+         $review = \App\Models\Review::where('book_id', $req->book_id)
+@@ -29,10 +29,10 @@ public function comment_input(Request $req)
+ 
+     public function store(Request $request)
+     {
+-
+-        // $user_id = 1; // 仮のユーザーID
+-        $user_id = Auth::id();
+-        // 既存のレビューがあれば取得、なければ新規作成
++        // ログインユーザーのidを取得
++        $user_id = Auth::guard('member')->id(); // ここはid（数値）
++        // dd($user_id); // ここで値を確認
++        // 既存レビューがあれば取得、なければ新規作成
+         $review = Review::where('book_id', $request->book_id)
+             ->where('user_id', $user_id)
+             ->first();
+@@ -40,14 +40,13 @@ public function store(Request $request)
+         if (!$review) {
+             $review = new Review();
+             $review->book_id = $request->book_id;
+-            $review->user_id = $user_id;
++            $review->user_id = $user_id; // ここにuser_nameではなくidをセット
+         }
+ 
+         $review->comment = $request->comment;
+         $review->rating = $request->rating;
+         $review->save();
+ 
+-        // 詳細画面にリダイレクト
+         return redirect()->route('db.detail', ['id' => $request->book_id]);
+     }
+     public function destroy($id, Request $request)
+diff --git a/book/app/Models/Review.php b/book/app/Models/Review.php
+index bada5ab..c9c9a27 100644
+--- a/book/app/Models/Review.php
++++ b/book/app/Models/Review.php
+@@ -11,12 +11,14 @@ class Review extends Model
+     protected $fillable = ['member_id', 'book_id', 'comment', 'rating'];
+ 
+     //レビューは一つの本に属する
+-   public function book(){
+-    return $this->belongsTo(Book::class);
+-   } 
++    public function book()
++    {
++        return $this->belongsTo(Book::class);
++    }
+ 
+-   //レビューは一人のメンバーに属する
+-   public function member(){
+-    return $this->belongsTo(Member::class);
+-   }
++    //レビューは一人のメンバーに属する
++    public function member()
++    {
++        return $this->belongsTo(\App\Models\Member::class, 'user_id');
++    }
+ }
+diff --git a/book/resources/views/db/detail.blade.php b/book/resources/views/db/detail.blade.php
+index f17c30d..515906d 100644
+--- a/book/resources/views/db/detail.blade.php
++++ b/book/resources/views/db/detail.blade.php
+@@ -82,7 +82,7 @@
+             <h2>コメント</h2>
+ 
+             @php
+-            $user_id = Auth::id(); // 仮のユーザーID
++            $user_id = Auth::guard('member')->id(); // 仮のユーザーID
+             @endphp
+             <div class="book-details bg-light p-4 rounded shadow-sm mb-4" style="max-height: 700px; overflow-y: auto;">
+                 <ul class="list-group">
+@@ -91,7 +91,7 @@
+                         <div style="flex:1;">
+                             <!-- ユーザー名とタイトル -->
+                             <div>
+-                                <span class="fw-bold">{{ $comment->user_id ?? 'ユーザー' }}</span>
++                                <span class="fw-bold">{{ $comment->member->user_name ?? 'ユーザー' }}</span>
+                                 <span class="text-warning ms-2" style="font-size: 1.2em;">
+                                     {{ str_repeat('★', $comment->rating) . str_repeat('☆', 5 - $comment->rating) }}
+                                 </span>
