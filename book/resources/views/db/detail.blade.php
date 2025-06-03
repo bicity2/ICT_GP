@@ -8,7 +8,7 @@
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <style>
         body {
-            width: 800px;
+            width: 1200px;
             margin: 10px auto;
         }
     </style>
