@@ -8,6 +8,73 @@
 </head>
 
 <body>
+
+  <h1>グループ課題用</h1>
+  <table border="1">
+    <caption>＜自動実行＞ 実行環境：GitBash / 実行場所：book</caption>
+    <tr>
+      <thead>
+        <th>内容　　　　　　</th>
+        <th>コマンド　　　　　　　　　　　</th>
+      </thead>
+    </tr>
+    <tr>
+      <td>★マイグレーション　</td>
+      <td>source script/migrate.sh</td>
+    </tr>
+    <tr>
+      <td>★シーダ　</td>
+      <td>source script/seeder.sh</td>
+    </tr>
+  </table>
+
+
+  <br><br>
+
+  <table border="1">
+    <caption>＜手動実行＞ 実行環境：GitBash / 実行場所：book / 必ず上から順に実行する</caption>
+
+    <tr>
+      <thead>
+        <th>内容　　　　　　　</th>
+        <th>コマンド　　　　　　　　　　　</th>
+      </thead>
+    </tr>
+    <tr>
+      <td>reset migration</td>
+      <td colspan>php artisan migrate:reset</td>
+    </tr>
+
+    <tr>
+      <td>migration（1/3）</td>
+      <td>php artisan migrate --path=database/migrations/2025_05_29_025928_create_books_table.php</td>
+    </tr>
+    <tr>
+      <td>migration（2/3）</td>
+      <td>php artisan migrate --path=database/migrations/2025_05_29_040341_create_members_table.php</td>
+    </tr>
+    <tr>
+      <td>migration（3/3）</td>
+      <td>php artisan migrate</td>
+    </tr>
+
+    <tr>
+      <td>seeder(1/3)</td>
+      <td>php artisan db:seed --class="BooksTableSeeder"</td>
+    </tr>
+    <tr>
+      <td>seeder(2/3)</td>
+      <td>php artisan db:seed --class="MembersTableSeeder"</td>
+    </tr>
+    <tr>
+      <td>seeder(3/3)</td>
+      <td>php artisan db:seed --class="ReviewsTableSeeder"</td>
+    </tr>
+  </table>
+
+  <br><br>
+
+  <hr>
   <h1>コマンド</h1>
   <table border="1">
     <tr>
@@ -75,14 +142,6 @@
       <td>php artisan make:seeder</td>
       <td>末尾に [ XxxxTableSeeder ] 先頭大文字</td>
     </tr>
-
-    <font color:red>
-      <tr>
-        <td>★シーダ実行実行　</td>
-        <td>source script/seeder.sh</td>
-        <td>GitBashで実行する</td>
-      </tr>
-    </font>
 
     <tr>
       <td>シーダ実行　</td>
