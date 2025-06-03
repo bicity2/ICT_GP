@@ -1,0 +1,48 @@
+diff --git a/book/database/migrations/2025_05_29_025928_create_books_table.php b/book/database/migrations/2025_05_29_025928_create_books_table.php
+index 488369b..8e54888 100644
+--- a/book/database/migrations/2025_05_29_025928_create_books_table.php
++++ b/book/database/migrations/2025_05_29_025928_create_books_table.php
+@@ -11,6 +11,11 @@
+      */
+     public function up(): void
+     {
++        /**
++         * Delete books
++         */
++        DB::statement('DROP TABLE IF EXISTS books');
++
+         Schema::create('books', function (Blueprint $table) {
+             $table->id();
+             $table->string("title");
+diff --git a/book/database/migrations/2025_05_29_040341_create_members_table.php b/book/database/migrations/2025_05_29_040341_create_members_table.php
+index 520e2a5..9d19e34 100644
+--- a/book/database/migrations/2025_05_29_040341_create_members_table.php
++++ b/book/database/migrations/2025_05_29_040341_create_members_table.php
+@@ -11,6 +11,11 @@
+      */
+     public function up(): void
+     {
++        /**
++         * Delete members
++         */
++        DB::statement('DROP TABLE IF EXISTS members');
++
+         Schema::create('members', function (Blueprint $table) {
+             $table->id();
+             $table->string("user_name");
+diff --git a/book/database/migrations/2025_05_30_094030_reviews.php b/book/database/migrations/2025_05_30_094030_reviews.php
+index a13e466..bf442c8 100644
+--- a/book/database/migrations/2025_05_30_094030_reviews.php
++++ b/book/database/migrations/2025_05_30_094030_reviews.php
+@@ -11,6 +11,11 @@
+      */
+     public function up(): void
+     {
++        /**
++         * Delete reviews
++         */
++        DB::statement('DROP TABLE IF EXISTS reviews');
++
+         Schema::create('reviews', function (Blueprint $table) {
+             $table->id();
+             $table->string("book_id", 20);
