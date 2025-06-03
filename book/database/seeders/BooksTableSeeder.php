@@ -12,6 +12,13 @@ class BooksTableSeeder extends Seeder
      */
     public function run(): void
     {
+        /**
+         * Delete books
+         */
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('books')->truncate(); // 既存データ削除
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         DB::table('books')->insert([
             [
                 'title' => 'はじめてのLaravel',

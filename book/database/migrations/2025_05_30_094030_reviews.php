@@ -13,16 +13,19 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->string("book_id",20);
+            $table->string("book_id", 20);
             $table->unsignedBigInteger("user_id");
             $table->string("comment");
             $table->unsignedTinyInteger("rating");
             $table->timestamps();
 
-            // リレーションシップ（外部参照制約）の設定
-            // p159
-            $table->foreign('book_id')->references('isbn')->on('books');
-            $table->foreign('user_id')->references('id')->on('members');
+            // 外部キー制約の設定 p159
+            $table->foreign('book_id')
+                    ->references('isbn')->on('books')
+                    ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                    ->references('id')->on('members');
         });
     }
 
@@ -31,6 +34,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('reviews', function (Blueprint $table) {
+            $table->dropForeign(['book_id']);
+            $table->dropForeign(['user_id']);
+        });
+
+        Schema::dropIfExists('reviews');
     }
 };
