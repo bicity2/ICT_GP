@@ -21,6 +21,12 @@ class BookController extends Controller
 
     public function addDone(Request $req)
     {
+        $req->validate([
+        'title' => 'required|string|max:255',
+        'author' => 'required|string|max:255',
+        'publisher' => 'required|string|max:255',
+        'isbn' => 'required|string|size:13|unique:books,isbn',
+    ]);
         $article = new Book();
         $article->title = $req->title;
         $article->author = $req->author;
@@ -79,42 +85,69 @@ class BookController extends Controller
     }
 
     public function register(Request $request)
-    {
-        $book = new Book();
-        $book->title = $request->title;
-        $book->author = $request->author;
-        $book->isbn = $request->isbn;
-        $book->save();
+{
+    // バリデーション（任意だが推奨）
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'author' => 'required|string|max:255',
+        'isbn' => 'required|string|size:13|unique:books,isbn',
+    ]);
 
-        return response()->json(['status' => 'ok']);
-    }
+    // 登録（1回で十分）
+    Book::create([
+        'title' => $request->title,
+        'author' => $request->author,
+        'isbn' => $request->isbn,
+    ]);
+
+    
+    return redirect()->route('books.index')->with('message', '登録が完了しました');
+}
 
     public function addWithBarcode()
     {
-        return view('db.addWithBarcode');
+    return view('db.addWithBarcode');
     }
 
-    public function addCheck(Request $request)
+    public function addCheck($isbn)
     {
-        // [Check] some action is under return, action should be above return
-        return view('db.addCheck', compact('isbn'));
-        // バリデーション
-        $validated = $request->validate([
-            'title'  => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'isbn'   => 'required|string|size:13|unique:books,isbn',
-        ]);
+    $bookInfo = $this->fetchBookInfoByISBN($isbn);
 
-        Book::create([
-            'title' => $request->title,
-            'author' => $request->author,
-            'isbn' => $request->isbn,
-        ]);
-        $isbn = $request->isbn;
+    return view('db.addCheck', [
+        'title' => $bookInfo['title'],
+        'author' => $bookInfo['author'],
+        'isbn13' => $isbn,
+        'publisher' =>$bookInfo['publisher'] ?? '不明',
+    ]);
+    }
+    //書籍データAPIから「本のタイトル」と「著者名」を取得するためのメソッド
+    private function fetchBookInfoByISBN($isbn)
+    {
+    $url = "https://api.openbd.jp/v1/get?isbn={$isbn}";
+    $response = Http::get($url);
 
-        // [Check] return is two, which should be one
-        return view('db.addCheck', compact('isbn'));
-        return response()->json(['message' => '登録成功']);
+    if ($response->failed()|| empty($response[0])) {
+        return [
+            'title' => '取得失敗',
+            'author' => '取得失敗',
+            'publisher'=>'取得失敗',
+        ];
     }
 
+     $data = $response[0]['summary'] ?? null;
+
+    if ($data) {
+        return [
+            'title' => $data['title'] ?? '不明',
+            'author' => $data['author'] ?? '不明',
+            'publisher'=>$data['publisher'] ?? '不明',
+        ];
+    }
+
+    return [
+        'title' => '書籍情報なし',
+        'author' => '書籍情報なし',
+        'publisher'=>'書籍情報なし',
+    ];
+    }
 }

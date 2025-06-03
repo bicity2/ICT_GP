@@ -11,6 +11,11 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/db/selectHowToAdd', function () {
+    return view('db.selectHowToAdd');
+});
+
+
 
 /**
  * DEBUG A 1/2 -->>
