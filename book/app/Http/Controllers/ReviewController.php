@@ -10,7 +10,7 @@ class ReviewController extends Controller
 {
     public function comment_input(Request $req)
     {
-        $user_id = Auth::id();
+        $user_id = 1;
         // $user_id = 1; // 仮のユーザーID
         // 既存のレビューを取得（book_idはISBNの場合もあるので注意）
         $review = \App\Models\Review::where('book_id', $req->book_id)
@@ -31,7 +31,7 @@ class ReviewController extends Controller
     {
 
         // $user_id = 1; // 仮のユーザーID
-        $user_id = Auth::id();
+        $user_id = 1;
         // 既存のレビューがあれば取得、なければ新規作成
         $review = Review::where('book_id', $request->book_id)
             ->where('user_id', $user_id)
