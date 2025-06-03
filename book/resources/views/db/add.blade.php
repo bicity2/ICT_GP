@@ -27,8 +27,14 @@
                     <input type="text"class="form-control"name="isbn"id="isbn"required>
                 </div>
                 <input type="submit"value="登録"class="btn btn-primary">
-            </form>
+                <div class="button-group">
+                <a href="/db/selectHowToAdd" class="btn btn-secondary">戻る</a>
+</div>
+            </form> 
+            </div>
             {{-- <img src="{{ asset('images/jump.gif') }}" alt="装飾画像" class="side-image"> --}}
+
+           
         </div>
     </main>
 

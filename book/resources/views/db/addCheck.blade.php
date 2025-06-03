@@ -11,14 +11,17 @@
 
   <p><strong>タイトル：</strong> {{ $title }}</p>
   <p><strong>著者：</strong> {{ $author }}</p>
+  <p><strong>出版社：</strong> {{ $publisher }}</p>
   <p><strong>ISBN：</strong> {{ $isbn13 }}</p>
 
   <form method="POST" action="/db/addDone">
     @csrf
     <input type="hidden" name="title" value="{{ $title }}">
     <input type="hidden" name="author" value="{{ $author }}">
+    <input type="hidden" name="publisher" value="{{ $publisher }}">
     <input type="hidden" name="isbn" value="{{ $isbn13 }}">
     <button type="submit">この書籍を登録</button>
   </form>
+  <a href="{{ route('db.addWithBarcode') }}" class="btn btn-secondary mt-3">戻る</a>
 </body>
 </html>
