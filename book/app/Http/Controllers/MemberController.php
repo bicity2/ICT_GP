@@ -9,25 +9,35 @@ class MemberController extends Controller
 {
     public function showLogin()
     {
-        return view('index');//ログインフォーム
+        return view('index'); //ログインフォーム
     }
 
     public function login(Request $req)
     {
         $credentials = $req->only('user_name', 'password');
 
-        if(Auth::guard('member')->attempt($credentials)){
-            $user=Auth::guard('member')->user();
+        if (Auth::guard('member')->attempt($credentials)) {
+            $user = Auth::guard('member')->user();
 
-            if($user->department ==='soumu'){
-                return redirect('/db/soumu');//総務向けメニュー
-            }else{
-                return redirect('/db/normal');//一般社員向けメニュー
+            if ($user->department === 'soumu') {
+                // user_nameとidを両方セッションに保存
+                session([
+                    'user_name' => $user->user_name,
+                    'user_id' => $user->id,
+                ]);
+                return redirect('/db/soumu'); //総務向けメニュー
+            } else {
+                // user_nameとidを両方セッションに保存
+                session([
+                    'user_name' => $user->user_name,
+                    'user_id' => $user->id,
+                ]);
+                return redirect('/db/normal'); //一般社員向けメニュー
             }
         }
         return back()->withErrors([
-            'user_name'=>'IDまたはパスワードが正しくありません'
-        ]);   
+            'user_name' => 'IDまたはパスワードが正しくありません'
+        ]);
     }
     // public function soumuMenu()
     // {

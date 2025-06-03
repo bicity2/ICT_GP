@@ -81,9 +81,9 @@
 
             <h2>コメント</h2>
 
-            @php
-            $user_id = 1; // 仮のユーザーID
-            @endphp
+@php
+    $user_id = session('user_id');
+@endphp
             <div class="book-details bg-light p-4 rounded shadow-sm mb-4" style="max-height: 700px; overflow-y: auto;">
                 <ul class="list-group">
                     @foreach($comments as $comment)
@@ -91,7 +91,7 @@
                         <div style="flex:1;">
                             <!-- ユーザー名とタイトル -->
                             <div>
-                                <span class="fw-bold">{{ $comment->user_id ?? 'ユーザー' }}</span>
+                                <span class="fw-bold">{{ $comment->member->user_name ?? 'ユーザー' }}</span>
                                 <span class="text-warning ms-2" style="font-size: 1.2em;">
                                     {{ str_repeat('★', $comment->rating) . str_repeat('☆', 5 - $comment->rating) }}
                                 </span>

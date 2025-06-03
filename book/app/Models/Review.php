@@ -11,12 +11,14 @@ class Review extends Model
     protected $fillable = ['member_id', 'book_id', 'comment', 'rating'];
 
     //レビューは一つの本に属する
-   public function book(){
-    return $this->belongsTo(Book::class);
-   } 
+    public function book()
+    {
+        return $this->belongsTo(Book::class);
+    }
 
-   //レビューは一人のメンバーに属する
-   public function member(){
-    return $this->belongsTo(Member::class);
-   }
+    //レビューは一人のメンバーに属する
+    public function member()
+    {
+        return $this->belongsTo(\App\Models\Member::class, 'user_id');
+    }
 }

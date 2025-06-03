@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Book;
 use App\Models\Review;
-
+use App\Models\Member;
 
 class BookController extends Controller
 {
@@ -24,11 +24,11 @@ class BookController extends Controller
     public function addDone(Request $req)
     {
         $req->validate([
-        'title' => 'required|string|max:255',
-        'author' => 'required|string|max:255',
-        'publisher' => 'required|string|max:255',
-        'isbn' => 'required|string|size:13|unique:books,isbn',
-    ]);
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'publisher' => 'required|string|max:255',
+            'isbn' => 'required|string|size:13|unique:books,isbn',
+        ]);
         $article = new Book();
         $article->title = $req->title;
         $article->author = $req->author;
@@ -89,10 +89,15 @@ class BookController extends Controller
         if (!$book) {
             abort(404, '書籍が見つかりません');
         }
-        $comments = Review::where('book_id', $book->isbn)->get();
+        $comments = Review::where('book_id', $book->isbn)
+            ->with('member')
+            ->get();
 
         // 自分のコメントを一番上に
-        $user_id = 1; // 仮のユーザーID
+        // セッションからuser_nameとidを取得
+        $user_name = session('user_name');
+        $user_id = session('user_id');
+
         $comments = $comments->sortByDesc(function ($comment) use ($user_id) {
             return $comment->user_id == $user_id ? 1 : 0;
         })->values();
@@ -111,69 +116,69 @@ class BookController extends Controller
     }
 
     public function register(Request $request)
-{
-    // バリデーション（任意だが推奨）
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'author' => 'required|string|max:255',
-        'isbn' => 'required|string|size:13|unique:books,isbn',
-    ]);
+    {
+        // バリデーション（任意だが推奨）
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'isbn' => 'required|string|size:13|unique:books,isbn',
+        ]);
 
-    // 登録（1回で十分）
-    Book::create([
-        'title' => $request->title,
-        'author' => $request->author,
-        'isbn' => $request->isbn,
-    ]);
+        // 登録（1回で十分）
+        Book::create([
+            'title' => $request->title,
+            'author' => $request->author,
+            'isbn' => $request->isbn,
+        ]);
 
-    
-    return redirect()->route('books.index')->with('message', '登録が完了しました');
-}
+
+        return redirect()->route('books.index')->with('message', '登録が完了しました');
+    }
 
     public function addWithBarcode()
     {
-    return view('db.addWithBarcode');
+        return view('db.addWithBarcode');
     }
 
     public function addCheck($isbn)
     {
-    $bookInfo = $this->fetchBookInfoByISBN($isbn);
+        $bookInfo = $this->fetchBookInfoByISBN($isbn);
 
-    return view('db.addCheck', [
-        'title' => $bookInfo['title'],
-        'author' => $bookInfo['author'],
-        'isbn13' => $isbn,
-        'publisher' =>$bookInfo['publisher'] ?? '不明',
-    ]);
+        return view('db.addCheck', [
+            'title' => $bookInfo['title'],
+            'author' => $bookInfo['author'],
+            'isbn13' => $isbn,
+            'publisher' => $bookInfo['publisher'] ?? '不明',
+        ]);
     }
     //書籍データAPIから「本のタイトル」と「著者名」を取得するためのメソッド
     private function fetchBookInfoByISBN($isbn)
     {
-    $url = "https://api.openbd.jp/v1/get?isbn={$isbn}";
-    $response = Http::get($url);
+        $url = "https://api.openbd.jp/v1/get?isbn={$isbn}";
+        $response = Http::get($url);
 
-    if ($response->failed()|| empty($response[0])) {
+        if ($response->failed() || empty($response[0])) {
+            return [
+                'title' => '取得失敗',
+                'author' => '取得失敗',
+                'publisher' => '取得失敗',
+            ];
+        }
+
+        $data = $response[0]['summary'] ?? null;
+
+        if ($data) {
+            return [
+                'title' => $data['title'] ?? '不明',
+                'author' => $data['author'] ?? '不明',
+                'publisher' => $data['publisher'] ?? '不明',
+            ];
+        }
+
         return [
-            'title' => '取得失敗',
-            'author' => '取得失敗',
-            'publisher'=>'取得失敗',
+            'title' => '書籍情報なし',
+            'author' => '書籍情報なし',
+            'publisher' => '書籍情報なし',
         ];
-    }
-
-     $data = $response[0]['summary'] ?? null;
-
-    if ($data) {
-        return [
-            'title' => $data['title'] ?? '不明',
-            'author' => $data['author'] ?? '不明',
-            'publisher'=>$data['publisher'] ?? '不明',
-        ];
-    }
-
-    return [
-        'title' => '書籍情報なし',
-        'author' => '書籍情報なし',
-        'publisher'=>'書籍情報なし',
-    ];
     }
 }
