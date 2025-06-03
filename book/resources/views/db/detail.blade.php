@@ -82,7 +82,7 @@
             <h2>コメント</h2>
 
             @php
-            $user_id = Auth::id(); // 仮のユーザーID
+            $user_id = 1; // 仮のユーザーID
             @endphp
             <div class="book-details bg-light p-4 rounded shadow-sm mb-4" style="max-height: 700px; overflow-y: auto;">
                 <ul class="list-group">
