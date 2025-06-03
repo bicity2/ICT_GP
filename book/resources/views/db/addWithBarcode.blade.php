@@ -11,12 +11,13 @@
   <h1>バーコードリーダーで読み取り</h1>
 
   <label for="codeInput">バーコード値：</label>
-  <input type="text" id="codeInput" autofocus placeholder="スキャンしてください">
- 
+  <input type="text" id="codeInput" autofocus placeholder="スキャンしてください"
+  inputmode="numeric" style="ime-mode:disabled;">
+
 
   <p>読み取った値：</p>
   <div id="textOutput" style="font-size: 20px; font-weight: bold;"></div>
- <a href="/db/selectHowToAdd">戻る</a>
+  <a href="/db/selectHowToAdd">戻る</a>
   <script>
     const input = document.getElementById('codeInput');
     const output = document.getElementById('textOutput');
