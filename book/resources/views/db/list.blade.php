@@ -19,7 +19,8 @@
 </head>
 
 <body>
-    <h1>書籍一覧</h1>
+    <h1 style="text-align: center;">書籍一覧</h1>
+    <hr>
     <table class="table">
         <thead>
             <tr>
