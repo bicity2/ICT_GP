@@ -22,27 +22,43 @@ class BookController extends Controller
     }
 
     public function addDone(Request $req)
-    {
-        $req->validate([
-            'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'publisher' => 'required|string|max:255',
-            'isbn' => 'required|string|size:13|unique:books,isbn',
-        ]);
-        $article = new Book();
-        $article->title = $req->title;
-        $article->author = $req->author;
-        $article->publisher = $req->publisher;
-        $article->isbn = $req->isbn;
-        $article->save();
-        $data = [
-            'title' => $req->title,
-            'author' => $req->author,
-            'publisher' => $req->publisher,
-            'isbn' => $req->isbn
-        ];
-        return view('db.addDone', $data);
+{
+    $req->validate([
+        'title' => 'required|string|max:255',
+        'author' => 'required|string|max:255',
+        'publisher' => 'required|string|max:255',
+        'isbn' => 'required|string|size:13',
+    ]);
+
+    $existingBook = Book::where('isbn', $req->isbn)->first();
+
+    if ($existingBook) {
+        // 既存の書籍がある場合 → 在庫を増やす
+        $existingBook->increment('stock');
+        $book = $existingBook;
+    } else {
+        // 新しい書籍の場合 → 新規作成（初期在庫は1）
+        $book = new Book();
+        $book->title = $req->title;
+        $book->author = $req->author;
+        $book->publisher = $req->publisher;
+        $book->isbn = $req->isbn;
+        $book->stock = 1;
+        $book->save();
     }
+
+    $data = [
+        'title' => $book->title,
+        'author' => $book->author,
+        'publisher' => $book->publisher,
+        'isbn' => $book->isbn,
+        'stock' => $book->stock,
+    ];
+
+    return view('db.addDone', $data);
+}
+
+
 
     public function erase(Request $req)
     {
@@ -56,20 +72,33 @@ class BookController extends Controller
         return view('db.erase', $data);
     }
 
+    
     public function eraseDone(Request $req)
     {
-        $article = Book::find($req->id);
-        $article->delete();
-        $data = [
-            'id' => $req->id,
-            'title' => $req->title,
-            'author' => $req->author,
-            'publisher' => $req->publisher,
-            'isbn' => $req->isbn
-        ];
-        return view('db.eraseDone', $data);
+    $book = Book::find($req->id);
+
+    if (!$book) {
+        return redirect()->route('db.list')->with('error', '書籍が見つかりません');
     }
 
+    if ($book->stock > 1) {
+        // 在庫が複数あるならstockをデクリメントして保存
+        $book->decrement('stock');
+    } else {
+        // 在庫が1の場合はレコードを削除
+        $book->delete();
+    }
+
+    $data = [
+        'id' => $req->id,
+        'title' => $req->title,
+        'author' => $req->author,
+        'publisher' => $req->publisher,
+        'isbn' => $req->isbn,
+    ];
+
+    return view('db.eraseDone', $data);
+    }
     public function list()
     {
         $data = [
@@ -77,6 +106,7 @@ class BookController extends Controller
         ];
         return view('db.list', $data);
     }
+
 
     public function detail(Request $req)
     {
@@ -124,12 +154,12 @@ class BookController extends Controller
             'isbn' => 'required|string|size:13|unique:books,isbn',
         ]);
 
-        // 登録（1回で十分）
-        Book::create([
-            'title' => $request->title,
-            'author' => $request->author,
-            'isbn' => $request->isbn,
-        ]);
+    // 登録（1回で十分）
+    Book::create([
+        'title' => $request->title,
+        'author' => $request->author,
+        'isbn' => $request->isbn,
+    ]);
 
 
         return redirect()->route('books.index')->with('message', '登録が完了しました');
@@ -182,3 +212,4 @@ class BookController extends Controller
         ];
     }
 }
+
