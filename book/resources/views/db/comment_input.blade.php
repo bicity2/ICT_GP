@@ -10,19 +10,14 @@
         rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
         crossorigin="anonymous">
-    <style>
-        /* body {
-            width: 800px;
-            margin: 10px auto;
-        } */
-    </style>
+
 </head>
 
 <body>
     <h1>コメント投稿フォーム</h1>
-    <div class="d-flex justify-content-start align-items-center" style="margin-top: 16px; margin-left: 16px;">
-    <a href="{{ route('db.detail', ['id' => $book_id]) }}" class="btn btn-secondary">書籍詳細ページへ戻る</a>
-</div>
+    <div>
+        <a href="{{ route('db.detail', ['id' => $book_id]) }}" class="btn btn-secondary" style="margin-left: 16px;margin-top: 16px;">書籍詳細ページへ戻る</a>
+    </div>
     <form action="{{ route('db.comment_store') }}" method="post">
         @csrf
         <input type="hidden" name="book_id" value="{{ $book_id ?? $id ?? '' }}">
