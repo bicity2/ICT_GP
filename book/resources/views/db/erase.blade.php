@@ -1,8 +1,8 @@
 {{-- resources/views/db/soumu.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
-@section('title', '書籍削除画面') {{-- <title> に反映 --}}
-    @section('h1title', '削除画面') {{-- <title> に反映 --}}
+@section('title', '書籍番号を入力') {{-- <title> に反映 --}}
+@section('h1title', '書籍番号を入力') {{-- <h1itle> に反映 --}}
 
 @section('head-content')
 <style>

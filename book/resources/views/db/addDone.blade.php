@@ -1,8 +1,8 @@
 {{-- resources/views/db/list.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
-@section('title', '書籍登録画面 - 完了') {{-- <title> に反映 --}}
-@section('h1title', '書籍登録画面 - 完了') {{-- <h1title> に反映 --}}
+@section('title', '書籍登録 - 完了') {{-- <title> に反映 --}}
+@section('h1title', '書籍登録 - 完了') {{-- <h1title> に反映 --}}
 @section('mainclass', 'addDone-list') {{-- <mainclass> に反映 --}}
 
 <!--<head>-->

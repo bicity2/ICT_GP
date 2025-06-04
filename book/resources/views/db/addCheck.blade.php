@@ -29,6 +29,9 @@
 @endsection
 <!--</head>
     <body>-->
+@section('header-content')
+<a href="{{ url('db/addWithBarcode') }}" class="btn btn-secondary me-2">戻る</a>
+@endsection
 @section('content')
 
     <div class="form-wrapper">
@@ -72,15 +75,12 @@
     <button type="submit" class="btn btn-primary me-2">この書籍を登録</button>
   </form> --}}
 
-<div class="form-wrapper">
-    <img src="{{ asset('images/vacuuming.gif') }}" alt="装飾画像" class="side-image">
-</div>
-
-<div class="form-wrapper">
+{{-- <div class="form-wrapper">
     <div class="button-group">
     <a href="{{ url('db/addWithBarcode') }}" class="btn btn-primary me-2">戻る</a>
     </div>
-</div>
+</div> --}}
+
   {{-- <a href="{{ route('db.addWithBarcode') }}" class="btn btn-secondary mt-3">戻る</a> --}}
 @endsection
 

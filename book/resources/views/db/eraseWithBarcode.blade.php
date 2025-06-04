@@ -1,8 +1,8 @@
 {{-- resources/views/db/list.addWithBarcode.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
-@section('title', '削除 - バーコードリーダー') {{-- <title> に反映 --}}
-@section('h1title', '削除 - バーコードリーダー') {{-- <h1title> に反映 --}}
+@section('title', 'バーコードリーダーで読み取り') {{-- <title> に反映 --}}
+@section('h1title', 'バーコードリーダーで読み取り') {{-- <h1title> に反映 --}}
 @section('mainclass', 'main-list') {{-- <mainclass> に反映 --}}
 
 <!--<head>-->

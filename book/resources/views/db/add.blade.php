@@ -1,7 +1,7 @@
 {{-- resources/views/db/soumu.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
-@section('title', '書籍データ新規登録') {{-- <title> に反映 --}}
+@section('title', '書籍登録') {{-- <title> に反映 --}}
 
 <!--</head>
     <body>-->
