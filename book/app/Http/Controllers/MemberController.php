@@ -80,13 +80,22 @@ class MemberController extends Controller
         $req->session()->regenerateToken();
         return view('db.logout');
     }
+
     public function soumu(Request $req)
     {
+        $department = session('department');
+        if($department!=="soumu"){
+            return redirect('index');
+        }
         return view('db.soumu');
     }
 
     public function normal(Request $req)
     {
+        $department = session('department');
+        if($department!=="soumu" && $department!=="normal"){
+            return redirect('index');
+        }
         return view('db.normal');
     }
 }

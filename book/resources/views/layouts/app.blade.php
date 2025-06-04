@@ -27,7 +27,7 @@
         <nav class="navbar">
             @yield('header-content')
             <a href="{{ $backUrl }}" class="btn btn-secondary me-2">メニュー</a>
-            <a href="{{ url('/db/index') }}" class="btn btn-secondary">ログアウト</a>
+            <a href="/db/logout" class="btn btn-secondary">ログアウト</a>
         </nav>
     </header>
 
