@@ -39,7 +39,7 @@
 <!--</head>
     <body>-->
 @section('header-content')
-<a href="{{ url('db/list') }}" class="btn btn-secondary me-2">戻る</a>
+<a href="{{ url('db/selectHowToErase') }}" class="btn btn-secondary me-2">戻る</a>
 @endsection
 @section('content')
 <h1>以下のデータを削除しました。</h1>
@@ -64,7 +64,7 @@
 </div>
 
 <div class="form-wrapper">
-    <img src="{{ asset('images/vacuuming.gif') }}" alt="装飾画像" class="side-image">
+    <img src="{{ asset('images/trash-can.gif') }}" alt="装飾画像" class="side-image">
 </div>
 
 <div class="form-wrapper">

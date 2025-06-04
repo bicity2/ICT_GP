@@ -58,7 +58,7 @@
                 <button type="submit" class="btn btn-primary mb-2">登録</button><br>
             </form>
         </div>
-        <img src="{{ asset('images/vacuuming.gif') }}" alt="装飾画像" class="side-image">
+        <img src="{{ asset('images/full-of-motivation.gif') }}" alt="装飾画像" class="side-image">
     </div>
 
   {{-- <p><strong>タイトル：</strong> {{ $title }}</p>
