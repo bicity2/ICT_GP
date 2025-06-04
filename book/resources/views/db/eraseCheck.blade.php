@@ -16,7 +16,7 @@
         @csrf
         <input type="hidden" name="isbn" value="{{ $isbn13 }}">
         <button type="submit" class="btn btn-danger">削除する</button>
-        <a href="{{ route('db.eraseWithBarcode') }}" class="btn btn-secondary">キャンセル</a>
+        <a href="{{ url('db.eraseWithBarcode') }}" class="btn btn-secondary">キャンセル</a>
     </form>
 </body>
 </html>

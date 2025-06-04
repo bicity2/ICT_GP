@@ -2,7 +2,7 @@
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
 @section('title', '総務専用メニュー') {{-- <title> に反映 --}}
-@section('h1title', '総務専用メニュ') {{-- <title> に反映 --}}
+@section('h1title', '総務専用メニュー') {{-- <title> に反映 --}}
 
 @section('content')
 

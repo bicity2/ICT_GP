@@ -72,12 +72,13 @@
 
   <div class="container">
       <h1>ログインフォーム</h1>
+
       @if($errors->any())
         <ul>
           @foreach($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
+          <li class="text-danger">{{ $error }}</li>
+          @endforeach
+        </ul>
       @endif
 
       <!-- TODO -->

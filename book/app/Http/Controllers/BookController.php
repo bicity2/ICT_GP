@@ -254,40 +254,25 @@ class BookController extends Controller
     }
     public function eraseCheck($isbn)
 {
+    // ISBN に一致する書籍を取得
     $book = Book::where('isbn', $isbn)->first();
 
+    // 書籍が見つからない場合はリダイレクト
     if (!$book) {
         return redirect()->route('db.list')->with('error', '書籍が見つかりません');
     }
 
-    return view('db.eraseCheck', [
-        'title' => $book->title,
-        'author' => $book->author,
-        'publisher' => $book->publisher,
-        'isbn' => $book->isbn,
-    ]);
+    // レコードをビューに渡す
+    $data = [
+        'record' => $book
+    ];
+
+    return view('db.erase', $data);
 }
 
-    public function eraseWithBarcode(Request $request)
+    public function eraseWithBarcode()
     {
-    $book = Book::where('isbn', $request->isbn)->first();
-
-    if (!$book) {
-        return redirect()->route('db.list')->with('error', '書籍が見つかりません');
-    }
-
-    if ($book->stock > 1) {
-        $book->decrement('stock');
-    } else {
-        $book->delete();
-    }
-
-    return view('db.erase.Done', [
-        'title' => $book->title,
-        'author' => $book->author,
-        'publisher' => $book->publisher,
-        'isbn' => $book->isbn,
-    ]);
+        return view('db.eraseWithBarcode');
     }
 
 }
