@@ -277,7 +277,8 @@ class BookController extends Controller
 
     public function eraseWithBarcode()
     {
-        return view('db.eraseWithBarcode');
+        $erase_mode="Barcode";
+        return view('db.eraseWithBarcode', ['erase_mode' => $erase_mode]);
     }
 
 }

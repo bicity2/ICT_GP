@@ -31,10 +31,10 @@
 <!--</head>
     <body>-->
 @section('header-content')
-    @if(isset($record))
-    <a href="{{ url('/db/erase') }}" class="btn btn-secondary me-2">戻る</a>
-    @else
+    @if($erase_mode==="Barcode")
     <a href="{{ url('/db/selectHowToErase') }}" class="btn btn-secondary me-2">戻る</a>
+    @elseif(isset($record))
+    <a href="{{ url('/db/erase') }}" class="btn btn-secondary me-2">戻る</a>
     @endif
 @endsection
 @section('content')
