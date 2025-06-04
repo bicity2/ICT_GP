@@ -56,6 +56,7 @@
                 <th>著者</th>
                 <th>出版社</th>
                 <th>ISBN</th>
+                <th>在庫</th>
             </tr>
         </thead>
         <tbody>
@@ -68,6 +69,7 @@
                 <td>{{ $book->author }}</td>
                 <td>{{ $book->publisher }}</td>
                 <td>{{ $book->isbn }}</td>
+                <td>{{ $book->stock}}</td>
                 <td>
                     <a href="{{ route('db.detail', ['id' => $book->id]) }}" class="btn btn-sm btn-primary">
                         詳細
