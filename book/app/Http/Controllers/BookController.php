@@ -240,7 +240,7 @@ class BookController extends Controller
     ]);
 }
 
-    public function eraseDoneWithBarcode(Request $request)
+    public function eraseWithBarcode(Request $request)
     {
     $book = Book::where('isbn', $request->isbn)->first();
 
@@ -254,7 +254,7 @@ class BookController extends Controller
         $book->delete();
     }
 
-    return view('db.eraseDone', [
+    return view('db.erase.Done', [
         'title' => $book->title,
         'author' => $book->author,
         'publisher' => $book->publisher,

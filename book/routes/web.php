@@ -17,6 +17,11 @@ Route::get('/db/selectHowToAdd', function () {
     return view('db.selectHowToAdd');
 });
 
+Route::get('/db/eraseSelectHowToAdd', function () {
+    return view('db.eraseSelectHowToAdd');
+});
+
+
 
 
 /**
@@ -51,7 +56,7 @@ Route::post('/db/erase', [BookController::class, 'erase']);
 Route::post('/db/eraseDone', [BookController::class, 'eraseDone'])->name('db.eraseDone');
 
 /* Book List */
-Route::get('/db/list', [BookController::class, 'list']);
+Route::get('/db/list', [BookController::class, 'list'])->name('db.list');
 Route::get('/db/detail', [BookController::class, 'detail'])->name('db.detail');
 Route::get('/db/comment_input', [ReviewController::class, 'comment_input'])->name('db.comment_input');
 Route::post('/db/comment_store', [ReviewController::class, 'store'])->name('db.comment_store');
@@ -60,8 +65,9 @@ Route::delete('/db/comment_delete/{id}', [ReviewController::class, 'destroy'])->
 Route::get('/db/addWithBarcode', [BookController::class, 'addWithBarcode'])->name('db.addWithBarcode');
 Route::get('/db/addCheck/{isbn}', [BookController::class, 'addCheck'])->name('db.addCheck');
 
+Route::post('/db/eraseWithBarcode', [BookController::class, 'eraseWithBarcode']);
 Route::get('/db/eraseCheck/{isbn}', [BookController::class, 'eraseCheck']);
-Route::post('/db/eraseDoneWithBarcode', [BookController::class, 'eraseDoneWithBarcode']);
+
 
 /**
  * DEBUG A 2/2 -->>
