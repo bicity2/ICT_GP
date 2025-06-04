@@ -9,21 +9,32 @@
         rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
         crossorigin="anonymous">
-  
+
     <title>書籍一覧</title>
 </head>
 
 <body>
     <h1>書籍一覧</h1>
-     <div class="d-flex justify-content-start align-items-center" style="margin-top: 16px; margin-left: 16px;">
-        <a href="{{ url('/') }}" class="btn btn-secondary">トップページに戻る</a>
+    <div class="d-flex justify-content-start align-items-center" style="margin-top: 16px; margin-left: 16px;">
+        @php
+        $department = session('department');
+        if ($department === 'soumu') {
+        $backUrl = url('/db/soumu');
+        } elseif ($department === 'ippan') {
+        $backUrl = url('/db/normal');
+        } else {
+        $backUrl = url('/');
+        }
+        @endphp
+        <a href="{{ $backUrl }}" class="btn btn-secondary">戻る</a>
 
-        <form action="/db/list" method="GET" class="d-flex">
+        <form action="/db/list" method="GET" class="d-flex ms-3 search-form align-items-center">
             <input type="text" name="keyword" class="form-control me-2" placeholder="キーワード検索" value="{{ request('keyword') }}">
-            <button type="submit" class="btn btn-primary">検索</button>
+            <button type="submit" class="btn btn-primary me-2">検索</button>
+            <a href="{{ url('/db/list') }}" class="btn btn-secondary">リセット</a>
         </form>
     </div>
-  <br><br>
+    <br><br>
     <table class="table">
         <thead>
             <tr>

@@ -24,6 +24,7 @@ class MemberController extends Controller
                 session([
                     'user_name' => $user->user_name,
                     'user_id' => $user->id,
+                    'department' => $user->department,
                 ]);
                 return redirect('/db/soumu'); //総務向けメニュー
             } else {
@@ -31,6 +32,7 @@ class MemberController extends Controller
                 session([
                     'user_name' => $user->user_name,
                     'user_id' => $user->id,
+                    'department' => $user->department,
                 ]);
                 return redirect('/db/normal'); //一般社員向けメニュー
             }
