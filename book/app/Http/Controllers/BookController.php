@@ -75,77 +75,78 @@ class BookController extends Controller
     
     public function eraseDone(Request $req)
     {
-    $book = Book::find($req->id);
+        $book = Book::where('isbn', $req->isbn)->first();
+        // $book = Book::find($req->id);
+        
+        if (!$book) {
+            return redirect()->route('db.selectHowToErase')->with('error', '書籍が見つかりません');
+        }
 
-    if (!$book) {
-        return redirect()->route('db.list')->with('error', '書籍が見つかりません');
-    }
+        if ($book->stock > 1) {
+            // 在庫が複数あるならstockをデクリメントして保存
+            $book->decrement('stock');
+        } else {
+            // 在庫が1の場合はレコードを削除
+            $book->delete();
+        }
 
-    if ($book->stock > 1) {
-        // 在庫が複数あるならstockをデクリメントして保存
-        $book->decrement('stock');
-    } else {
-        // 在庫が1の場合はレコードを削除
-        $book->delete();
-    }
+        $data = [
+            'id' => $req->id,
+            'title' => $req->title,
+            'author' => $req->author,
+            'publisher' => $req->publisher,
+            'isbn' => $req->isbn,
+        ];
 
-    $data = [
-        'id' => $req->id,
-        'title' => $req->title,
-        'author' => $req->author,
-        'publisher' => $req->publisher,
-        'isbn' => $req->isbn,
-    ];
-
-    return view('db.eraseDone', $data);
+        return view('db.eraseDone', $data);
     }
 
     public function eraseDoneFromList(Request $req)
     {
-    $book = Book::find($req->id);
+        $book = Book::find($req->id);
 
-    if (!$book) {
-        return redirect()->route('db.list')->with('error', '書籍が見つかりません');
-    }
+        if (!$book) {
+            return redirect()->route('db.list')->with('error', '書籍が見つかりません');
+        }
 
-    if ($book->stock > 1) {
-        // 在庫が複数あるならstockをデクリメントして保存
-        $book->decrement('stock');
-    } else {
-        // 在庫が1の場合はレコードを削除
-        $book->delete();
-    }
+        if ($book->stock > 1) {
+            // 在庫が複数あるならstockをデクリメントして保存
+            $book->decrement('stock');
+        } else {
+            // 在庫が1の場合はレコードを削除
+            $book->delete();
+        }
 
-    $data = [
-        'id' => $req->id,
-        'title' => $req->title,
-        'author' => $req->author,
-        'publisher' => $req->publisher,
-        'isbn' => $req->isbn,
-    ];
+        $data = [
+            'id' => $req->id,
+            'title' => $req->title,
+            'author' => $req->author,
+            'publisher' => $req->publisher,
+            'isbn' => $req->isbn,
+        ];
 
-    return view('db.eraseDoneFromList', $data);
+        return view('db.eraseDoneFromList', $data);
     }
 
 
     public function list(Request $request)
     {
-    $keyword = $request->input('keyword'); // フォームからキーワード取得
+        $keyword = $request->input('keyword'); // フォームからキーワード取得
 
-    $query = Book::query();
+        $query = Book::query();
 
-    if (!empty($keyword)) {
-        $query->where('title', 'like', "%{$keyword}%")
-                ->orWhere('author', 'like', "%{$keyword}%")
-                ->orWhere('publisher', 'like', "%{$keyword}%")
-                ->orWhere('isbn', 'like', "%{$keyword}%");
-    }
+        if (!empty($keyword)) {
+            $query->where('title', 'like', "%{$keyword}%")
+                    ->orWhere('author', 'like', "%{$keyword}%")
+                    ->orWhere('publisher', 'like', "%{$keyword}%")
+                    ->orWhere('isbn', 'like', "%{$keyword}%");
+        }
 
-    $data = [
-        'records' => $query->paginate(5)
-    ];
+        $data = [
+            'records' => $query->paginate(5)
+        ];
 
-    return view('db.list', $data);
+        return view('db.list', $data);
     }
 
 
@@ -252,23 +253,27 @@ class BookController extends Controller
             'publisher' => '書籍情報なし',
         ];
     }
+    
     public function eraseCheck($isbn)
-{
-    // ISBN に一致する書籍を取得
-    $book = Book::where('isbn', $isbn)->first();
+    {
+        // ISBN に一致する書籍を取得
+        $book = Book::where('isbn', $isbn)->first();
 
-    // 書籍が見つからない場合はリダイレクト
-    if (!$book) {
-        return redirect()->route('db.list')->with('error', '書籍が見つかりません');
+        // 書籍が見つからない場合はリダイレクト
+        if (!$book) {
+                    return back()->withErrors([
+            'user_name' => 'ISBNが正しくありません。'
+        ]);
+            // return redirect()->route('db.selectHowToErase')->with('error', '書籍が見つかりません');
+        }
+
+        // レコードをビューに渡す
+        $data = [
+            'record' => $book
+        ];
+
+        return view('db.erase', $data);
     }
-
-    // レコードをビューに渡す
-    $data = [
-        'record' => $book
-    ];
-
-    return view('db.erase', $data);
-}
 
     public function eraseWithBarcode()
     {

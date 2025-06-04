@@ -18,7 +18,7 @@
             display: flex;
             /* 横方向中央寄せ */
             justify-content: center;
-
+            min-width: 1500px;
         }
 
         .left {
@@ -57,7 +57,7 @@
     </div> --}}
 
 <div class="form-wrapper">
-    <img src="{{ asset('images/make-effort.gif') }}" alt="装飾画像" class="side-image">
+    {{-- <img src="{{ asset('images/make-effort.gif') }}" alt="装飾画像" class="side-image"> --}}
     <div class="container">
         <div class="left">
             <h2>書籍詳細</h2>

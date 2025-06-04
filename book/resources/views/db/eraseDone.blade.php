@@ -69,7 +69,7 @@
 
 <div class="form-wrapper">
     <div class="button-group">
-    <a href="{{ url('db/list') }}" class="btn btn-primary me-2">戻る</a>
+    <a href="{{ url('db/selectHowToErase') }}" class="btn btn-primary me-2">戻る</a>
     </div>
 </div>
 
