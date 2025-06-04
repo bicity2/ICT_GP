@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <img src="{{ asset('images/sideways.gif') }}" alt="装飾画像" class="side-image">
+  <img src="{{ asset('images/dog-shock.gif') }}" alt="装飾画像" class="side-image">
 </div>
 @endsection
 <!--</body>-->
