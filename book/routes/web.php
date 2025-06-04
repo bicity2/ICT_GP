@@ -48,7 +48,7 @@ Route::post('/db/addDone', [BookController::class, 'addDone']);
 /* Delete Book */
 Route::get('/db/erase', [BookController::class, 'erase']);
 Route::post('/db/erase', [BookController::class, 'erase']);
-Route::post('/db/eraseDone', [BookController::class, 'eraseDone']);
+Route::post('/db/eraseDone', [BookController::class, 'eraseDone'])->name('db.eraseDone');
 
 /* Book List */
 Route::get('/db/list', [BookController::class, 'list']);

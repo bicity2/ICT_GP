@@ -26,7 +26,7 @@
             flex: 1;
 
             padding: 16px;
-            border-right: 1px solid #ccc;
+            /* border-right: 1px solid #ccc; */
         }
 
         .right {
@@ -67,23 +67,30 @@
             </div>
 
             <!-- 評価を表示＆評価をクリックでcommendページ移動する -->
-            <h2 class="h4 mt-4">評価</h2>
+            <h2 class="h4 mt-4">おすすめ度</h2>
             <div>
                 <span class="text-warning" style="font-size: 1.5em;">
                     {{ str_repeat('★', floor($average)) }}{{ ($average - floor($average)) >= 0.5 ? '☆' : '' }}{{ str_repeat('☆', 5 - ceil($average)) }}
                 </span>
 
-                <p class="mb-0"><strong>評価：</strong>{{ $average }}</p>
+                <p class="mb-0"><strong>おすすめ度：</strong>{{ $average }}</p>
             </div>
             <a href="{{ route('db.comment_input', ['book_id' => $record->isbn]) }}" class="btn btn-primary mt-3">コメント投稿</a>
         </div>
+        @php
+        $department = session('department');
+        @endphp
+
+
+
+
         <div class="right">
 
             <h2>コメント</h2>
 
-@php
-    $user_id = session('user_id');
-@endphp
+            @php
+            $user_id = session('user_id');
+            @endphp
             <div class="book-details bg-light p-4 rounded shadow-sm mb-4" style="max-height: 700px; overflow-y: auto;">
                 <ul class="list-group">
                     @foreach($comments as $comment)

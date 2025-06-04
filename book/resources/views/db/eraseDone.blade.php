@@ -4,20 +4,25 @@
 @section('title', '書籍削除 - 完了') {{-- <title> に反映 --}}
 
 @section('content')
-    <h1>以下のデータを削除しました💛</h1>
-    <table class="table">
-        <tr><th>タイトル</th><th>著者</th><th>出版社</th><th>ISBN</th></tr>
-        <tr>
-            <td>{{$title}}</td>
-            <td>{{$author}}</td>
-            <td>{{$publisher}}</td>
-            <td>{{$isbn}}</td>
-        </tr>
-    </table>
+<h1>以下のデータを削除しました💛</h1>
+<table class="table">
+    <tr>
+        <th>タイトル</th>
+        <th>著者</th>
+        <th>出版社</th>
+        <th>ISBN</th>
+    </tr>
+    <tr>
+        <td>{{$title}}</td>
+        <td>{{$author}}</td>
+        <td>{{$publisher}}</td>
+        <td>{{$isbn}}</td>
+    </tr>
+</table>
 
-    <div class="form-wrapper">
-        <div class="button-group">
-            <a href="/db/soumu" class="btn btn-primary mb-2">メニューに戻る</a>
-        </div>
+<div class="form-wrapper">
+    <div class="button-group">
+        <a href="/db/soumu" class="btn btn-primary mb-2">メニューに戻る</a>
     </div>
+</div>
 @endsection

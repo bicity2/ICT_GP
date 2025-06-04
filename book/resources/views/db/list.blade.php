@@ -9,7 +9,17 @@
         rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
         crossorigin="anonymous">
+    <style>
+        /* このページのテーブル内リンクだけに適用 */
+        .table a {
+            text-decoration: none;
+            transition: text-decoration 0.2s;
+        }
 
+        .table a:hover {
+            text-decoration: underline;
+        }
+    </style>
     <title>書籍一覧</title>
 </head>
 
@@ -26,7 +36,7 @@
         $backUrl = url('/');
         }
         @endphp
-        <a href="{{ $backUrl }}" class="btn btn-secondary">戻る</a>
+        <a href="{{ $backUrl }}" class="btn btn-secondary">メニューに戻る</a>
 
         <form action="/db/list" method="GET" class="d-flex ms-3 search-form align-items-center">
             <input type="text" name="keyword" class="form-control me-2" placeholder="キーワード検索" value="{{ request('keyword') }}">
@@ -35,6 +45,9 @@
         </form>
     </div>
     <br><br>
+    @php
+    $department = session('department');
+    @endphp
     <table class="table">
         <thead>
             <tr>
@@ -59,6 +72,17 @@
                     <a href="{{ route('db.detail', ['id' => $book->id]) }}" class="btn btn-sm btn-primary">
                         詳細
                     </a>
+                    @if($department === 'soumu')
+                    <form action="/db/eraseDone" method="POST" style="display:inline;">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $book->id }}">
+                        <input type="hidden" name="title" value="{{ $book->title }}">
+                        <input type="hidden" name="author" value="{{ $book->author }}">
+                        <input type="hidden" name="publisher" value="{{ $book->publisher }}">
+                        <input type="hidden" name="isbn" value="{{ $book->isbn }}">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('本当に削除しますか？')">削除</button>
+                    </form>
+                    @endif
                 </td>
             </tr>
             @endforeach

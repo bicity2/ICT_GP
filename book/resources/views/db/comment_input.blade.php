@@ -30,7 +30,7 @@
         <label>コメント:<br>
             <textarea name="comment" rows="5" cols="40" required>{{ old('comment', $review->comment ?? '') }}</textarea>
         </label><br><br>
-        <label>評価：
+        <label>おすすめ度：
             <select name="rating" required style="font-size:1.2em;">
                 <option value="">選択してください</option>
                 @for ($i = 1; $i <= 5; $i++)
