@@ -192,6 +192,7 @@ class BookController extends Controller
             'author' => $bookInfo['author'],
             'isbn13' => $isbn,
             'publisher' => $bookInfo['publisher'] ?? '不明',
+            'cover_image' => $bookInfo['cover_image'],
         ]);
     }
     //書籍データAPIから「本のタイトル」と「著者名」を取得するためのメソッド
@@ -215,6 +216,7 @@ class BookController extends Controller
                 'title' => $data['title'] ?? '不明',
                 'author' => $data['author'] ?? '不明',
                 'publisher' => $data['publisher'] ?? '不明',
+                'cover_image' => $data['cover_image'] ?? '',
             ];
         }
 
@@ -224,4 +226,27 @@ class BookController extends Controller
             'publisher' => '書籍情報なし',
         ];
     }
+    
+    // DEV NOW 貸出中 -->
+    public function borrow($bookId)
+    {
+        $book = Book::findOrFail($bookId);
+
+        if ($book->stock < 1) {
+            return back()->with('error', '在庫がありません');
+        }
+
+        // 在庫を減らす
+        $book->decrement('stock');
+
+        // 貸出記録を作成
+        Loan::create([
+            'book_id' => $book->id,
+            'member_id' => Auth::id(),
+            'borrowed_at' => now(),
+        ]);
+
+        return back()->with('success', '貸出が完了しました');
+    }
+    // <<-- DEV NOW 貸出中 END
 }

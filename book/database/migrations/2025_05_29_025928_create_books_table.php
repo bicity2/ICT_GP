@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("author");
             $table->string("publisher");
             $table->string("isbn", 20);
+            $table->string("cover_image")->nullable(); // ← 表紙画像のURLカラムを追加
             $table->unsignedInteger("stock")->default(1);//整数でデフォルト値を持たせる
             $table->timestamps();
         });
