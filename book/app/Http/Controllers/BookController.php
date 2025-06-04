@@ -224,4 +224,42 @@ class BookController extends Controller
             'publisher' => '書籍情報なし',
         ];
     }
+    public function eraseCheck($isbn)
+{
+    $book = Book::where('isbn', $isbn)->first();
+
+    if (!$book) {
+        return redirect()->route('db.list')->with('error', '書籍が見つかりません');
+    }
+
+    return view('db.eraseCheck', [
+        'title' => $book->title,
+        'author' => $book->author,
+        'publisher' => $book->publisher,
+        'isbn' => $book->isbn,
+    ]);
+}
+
+    public function eraseDoneWithBarcode(Request $request)
+    {
+    $book = Book::where('isbn', $request->isbn)->first();
+
+    if (!$book) {
+        return redirect()->route('db.list')->with('error', '書籍が見つかりません');
+    }
+
+    if ($book->stock > 1) {
+        $book->decrement('stock');
+    } else {
+        $book->delete();
+    }
+
+    return view('db.eraseDone', [
+        'title' => $book->title,
+        'author' => $book->author,
+        'publisher' => $book->publisher,
+        'isbn' => $book->isbn,
+    ]);
+    }
+
 }

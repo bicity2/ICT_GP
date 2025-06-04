@@ -60,6 +60,9 @@ Route::delete('/db/comment_delete/{id}', [ReviewController::class, 'destroy'])->
 Route::get('/db/addWithBarcode', [BookController::class, 'addWithBarcode'])->name('db.addWithBarcode');
 Route::get('/db/addCheck/{isbn}', [BookController::class, 'addCheck'])->name('db.addCheck');
 
+Route::get('/db/eraseCheck/{isbn}', [BookController::class, 'eraseCheck']);
+Route::post('/db/eraseDoneWithBarcode', [BookController::class, 'eraseDoneWithBarcode']);
+
 /**
  * DEBUG A 2/2 -->>
  * });

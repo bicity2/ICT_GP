@@ -36,7 +36,7 @@
     </div>
 </form>
 @else
-<form action="/db/erase" method="post">
+<form action="/db/eraseSelectHowToAdd" method="post">
     @csrf
     投稿番号<input type="number" name="id" required>
     <input type="submit" value="データ表示"><br>
