@@ -99,12 +99,25 @@ class BookController extends Controller
 
     return view('db.eraseDone', $data);
     }
-    public function list()
+
+    public function list(Request $request)
     {
-        $data = [
-            'records' => Book::paginate(5)
-        ];
-        return view('db.list', $data);
+    $keyword = $request->input('keyword'); // フォームからキーワード取得
+
+    $query = Book::query();
+
+    if (!empty($keyword)) {
+        $query->where('title', 'like', "%{$keyword}%")
+                ->orWhere('author', 'like', "%{$keyword}%")
+                ->orWhere('publisher', 'like', "%{$keyword}%")
+                ->orWhere('isbn', 'like', "%{$keyword}%");
+    }
+
+    $data = [
+        'records' => $query->paginate(5)
+    ];
+
+    return view('db.list', $data);
     }
 
 
@@ -212,4 +225,3 @@ class BookController extends Controller
         ];
     }
 }
-

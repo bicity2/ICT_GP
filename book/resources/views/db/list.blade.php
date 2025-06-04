@@ -17,6 +17,11 @@
     <h1>書籍一覧</h1>
      <div class="d-flex justify-content-start align-items-center" style="margin-top: 16px; margin-left: 16px;">
         <a href="{{ url('/') }}" class="btn btn-secondary">トップページに戻る</a>
+
+        <form action="/db/list" method="GET" class="d-flex">
+            <input type="text" name="keyword" class="form-control me-2" placeholder="キーワード検索" value="{{ request('keyword') }}">
+            <button type="submit" class="btn btn-primary">検索</button>
+        </form>
     </div>
   <br><br>
     <table class="table">
