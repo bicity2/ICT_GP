@@ -1,9 +1,9 @@
-{{-- resources/views/db/eraseDone.blade.php --}}
+{{-- resources/views/db/eraseDoneFromList.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
 @section('title', '書籍削除 - 完了') {{-- <title> に反映 --}}
 @section('h1title', '書籍削除 - 完了') {{-- <h1title> に反映 --}}
-@section('mainclass', 'eraseDone-list') {{-- <mainclass> に反映 --}}
+@section('mainclass', 'eraseDoneFromList-list') {{-- <mainclass> に反映 --}}
 
 <!--<head>-->
 @section('head-content')

@@ -17,8 +17,8 @@ Route::get('/db/selectHowToAdd', function () {
     return view('db.selectHowToAdd');
 });
 
-Route::get('/db/eraseSelectHowToAdd', function () {
-    return view('db.eraseSelectHowToAdd');
+Route::get('/db/selectHowToErase', function () {
+    return view('db.selectHowToErase');
 });
 
 
@@ -54,6 +54,7 @@ Route::post('/db/addDone', [BookController::class, 'addDone']);
 Route::get('/db/erase', [BookController::class, 'erase']);
 Route::post('/db/erase', [BookController::class, 'erase']);
 Route::post('/db/eraseDone', [BookController::class, 'eraseDone'])->name('db.eraseDone');
+Route::post('/db/eraseDoneFromList', [BookController::class, 'eraseDoneFromList'])->name('db.eraseDonFromList');
 
 /* Book List */
 Route::get('/db/list', [BookController::class, 'list'])->name('db.list');

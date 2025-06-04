@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="ja">
+{{-- resources/views/db/list.blade.php --}}
+@extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+@section('title', '書籍詳細とコメント') {{-- <title> に反映 --}}
+@section('h1title', '書籍詳細とコメント') {{-- <h1title> に反映 --}}
+@section('mainclass', 'main-list') {{-- <mainclass> に反映 --}}
+
+@section('head-content')
     <style>
         /* body {
             width: 1200px;
@@ -45,15 +44,21 @@
             margin-bottom: 0;
         }
     </style>
-</head>
+@endsection
+<!--</head>
+    <body>-->
+@section('header-content')
+<a href="{{ url('db/list') }}" class="btn btn-secondary me-2">戻る</a>
+@endsection
+@section('content')
 
-<body>
-    <h1>書籍詳細とコメント</h1>
-    <div class="d-flex justify-content-start align-items-center" style="margin-top: 16px; margin-left: 16px;">
+    {{-- <div class="d-flex justify-content-start align-items-center" style="margin-top: 16px; margin-left: 16px;">
         <a href="{{ url('db/list') }}" class="btn btn-secondary">書籍一覧に戻る</a>
-    </div>
-    <div class="container">
+    </div> --}}
 
+<div class="form-wrapper">
+    <img src="{{ asset('images/make-effort.gif') }}" alt="装飾画像" class="side-image">
+    <div class="container">
         <div class="left">
             <h2>書籍詳細</h2>
             <div class="book-details bg-light p-4 rounded shadow-sm mb-4">
@@ -77,12 +82,9 @@
             </div>
             <a href="{{ route('db.comment_input', ['book_id' => $record->isbn]) }}" class="btn btn-primary mt-3">コメント投稿</a>
         </div>
-        @php
+        {{-- @php
         $department = session('department');
-        @endphp
-
-
-
+        @endphp --}}
 
         <div class="right">
 
@@ -131,6 +133,8 @@
             </div>
         </div>
     </div>
-</body>
+    <img src="{{ asset('images/dog-understand.gif') }}" alt="装飾画像" class="side-image">
+</div>
 
-</html>
+@endsection
+<!--</body>-->

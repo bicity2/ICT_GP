@@ -1,16 +1,20 @@
-<!DOCTYPE html>
-<html lang="ja">
+{{-- resources/views/db/list.blade.php --}}
+@extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-        crossorigin="anonymous">
+@section('title', '書籍一覧') {{-- <title> に反映 --}}
+@section('h1title', '書籍一覧') {{-- <h1title> に反映 --}}
+@section('mainclass', 'main-list') {{-- <mainclass> に反映 --}}
+
+<!--<head>-->
+@section('head-content')
+
     <style>
         /* このページのテーブル内リンクだけに適用 */
+        .table {
+            width: 94vw;
+            margin-left: 3vw;
+            margin-right: 3vw;
+        }
         .table a {
             text-decoration: none;
             transition: text-decoration 0.2s;
@@ -19,14 +23,17 @@
         .table a:hover {
             text-decoration: underline;
         }
+        .side-image {
+            width: 300px;
+        }
     </style>
-    <title>書籍一覧</title>
-</head>
 
-<body>
-    <h1>書籍一覧</h1>
+@endsection
+<!--</head>
+    <body>-->
+@section('content')
     <div class="d-flex justify-content-start align-items-center" style="margin-top: 16px; margin-left: 16px;">
-        @php
+        {{-- @php
         $department = session('department');
         if ($department === 'soumu') {
         $backUrl = url('/db/soumu');
@@ -35,8 +42,7 @@
         } else {
         $backUrl = url('/');
         }
-        @endphp
-        <a href="{{ $backUrl }}" class="btn btn-secondary">メニューに戻る</a>
+        @endphp --}}
 
         <form action="/db/list" method="GET" class="d-flex ms-3 search-form align-items-center">
             <input type="text" name="keyword" class="form-control me-2" placeholder="キーワード検索" value="{{ request('keyword') }}">
@@ -44,10 +50,13 @@
             <a href="{{ url('/db/list') }}" class="btn btn-secondary">リセット</a>
         </form>
     </div>
+
     <br><br>
+
     @php
     $department = session('department');
     @endphp
+
     <table class="table">
         <thead>
             <tr>
@@ -57,6 +66,7 @@
                 <th>出版社</th>
                 <th>ISBN</th>
                 <th>在庫</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -75,7 +85,7 @@
                         詳細
                     </a>
                     @if($department === 'soumu')
-                    <form action="/db/eraseDone" method="POST" style="display:inline;">
+                    <form action="/db/eraseDoneFromList" method="POST" style="display:inline;">
                         @csrf
                         <input type="hidden" name="id" value="{{ $book->id }}">
                         <input type="hidden" name="title" value="{{ $book->title }}">
@@ -88,11 +98,18 @@
                 </td>
             </tr>
             @endforeach
-
         </tbody>
     </table>
-    <!-- ページネーションのリンクを表示 -->
-    {{ $records->links() }}
-</body>
 
-</html>
+    <!-- ページネーションのリンクを表示 -->
+    <div style="margin-left: 3vw;">
+        {{ $records->links() }}
+    </div>
+    <div class="form-wrapper">
+        <img src="{{ asset('images/bicycle.gif') }}" alt="装飾画像" class="side-image">
+        <img src="{{ asset('images/bicycle.gif') }}" alt="装飾画像" class="side-image">
+        <img src="{{ asset('images/bicycle.gif') }}" alt="装飾画像" class="side-image">
+    </div>
+
+@endsection
+<!--</body></html>-->

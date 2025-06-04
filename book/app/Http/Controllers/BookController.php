@@ -100,6 +100,34 @@ class BookController extends Controller
     return view('db.eraseDone', $data);
     }
 
+    public function eraseDoneFromList(Request $req)
+    {
+    $book = Book::find($req->id);
+
+    if (!$book) {
+        return redirect()->route('db.list')->with('error', '書籍が見つかりません');
+    }
+
+    if ($book->stock > 1) {
+        // 在庫が複数あるならstockをデクリメントして保存
+        $book->decrement('stock');
+    } else {
+        // 在庫が1の場合はレコードを削除
+        $book->delete();
+    }
+
+    $data = [
+        'id' => $req->id,
+        'title' => $req->title,
+        'author' => $req->author,
+        'publisher' => $req->publisher,
+        'isbn' => $req->isbn,
+    ];
+
+    return view('db.eraseDoneFromList', $data);
+    }
+
+
     public function list(Request $request)
     {
     $keyword = $request->input('keyword'); // フォームからキーワード取得

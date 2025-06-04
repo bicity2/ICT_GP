@@ -18,6 +18,12 @@ body {
   min-height: 100vh;
 }
 
+
+
+header {
+  border-bottom: 2px solid #4a90e2; /* お好みの色や太さに調整してください */
+}
+
 /* ページをヘッダー、メイン、フッターに分割 */
 .content {
   flex: 1;
@@ -25,15 +31,38 @@ body {
 }
 
 main.content {
+  height:95vh;
+  margin-bottom: calc(5vh + 20px); /* 20pxはfooter上下のpadding分 */
   flex: 1;
 }
 
-.page-footer {
+.main-normal-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+/* .page-footer {
   background-color: #343a40;
   color: white;
   text-align: center;
   padding: 10px;
   flex-shrink: 0;
+  height: 5vh;
+} */
+
+.page-footer {
+    position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5vh;
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  flex-shrink: 0;
+  z-index: 1000; /* 他の要素より前面 */
 }
 
 
@@ -118,7 +147,6 @@ form {
 h1,
 h2 {
   color: #2c3e50;
-  border-bottom: 2px solid #4a90e2;
   padding: 10px;
   margin: 20px 50px 60px 50px;
 }
@@ -127,7 +155,8 @@ h2 {
 .form-wrapper {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;            /* 縦方向中央揃え */
+
   gap: 40px;
   /* フォームと画像の間の余白 */
   margin-top: 30px;

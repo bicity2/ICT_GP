@@ -17,7 +17,7 @@
 
   <p>読み取った値：</p>
   <div id="textOutput" style="font-size: 20px; font-weight: bold;"></div>
-  <a href="/db/eraseSelectHowToAdd">戻る</a>
+  <a href="/db/selectHowToErase">戻る</a>
   <script>
     const input = document.getElementById('codeInput');
     const output = document.getElementById('textOutput');

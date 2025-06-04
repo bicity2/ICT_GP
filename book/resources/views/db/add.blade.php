@@ -1,10 +1,15 @@
 {{-- resources/views/db/soumu.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
-@section('title', '書籍登録画面') {{-- <title> に反映 --}}
+@section('title', '書籍データ新規登録') {{-- <title> に反映 --}}
+
+<!--</head>
+    <body>-->
+@section('header-content')
+<a href="{{ url('db/selectHowToAdd') }}" class="btn btn-secondary me-2">戻る</a>
+@endsection
 
 @section('content')
-    <h1>書籍データ新規登録</h1>
 
     <main class="content">
         <div class="form-wrapper">
@@ -27,15 +32,10 @@
                     <input type="text"class="form-control"name="isbn"id="isbn"required>
                 </div>
                 <input type="submit"value="登録"class="btn btn-primary">
-                <div class="button-group">
-                <a href="/db/selectHowToAdd" class="btn btn-secondary">戻る</a>
-</div>
             </form> 
-            </div>
-            {{-- <img src="{{ asset('images/jump.gif') }}" alt="装飾画像" class="side-image"> --}}
-
-           
+            <img src="{{ asset('images/jump.gif') }}" alt="装飾画像" class="side-image">
         </div>
     </main>
 
 @endsection
+<!--</body>-->
