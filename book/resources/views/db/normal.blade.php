@@ -1,8 +1,8 @@
 {{-- resources/views/db/normal.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
-@section('title', '社員用メニュー') {{-- <title> に反映 --}}
-@section('h1title', '社員用メニュ') {{-- <h1title> に反映 --}}
+@section('title', '一般社員用メニュー') {{-- <title> に反映 --}}
+@section('h1title', '一般社員用メニュー') {{-- <h1title> に反映 --}}
 @section('mainclass', 'main-normal') {{-- <mainclass> に反映 --}}
 
 @section('content')
