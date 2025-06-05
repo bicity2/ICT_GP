@@ -1,8 +1,8 @@
 {{-- resources/views/db/soumu.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
-@section('title', '書籍番号を入力') {{-- <title> に反映 --}}
-@section('h1title', '書籍番号を入力') {{-- <h1itle> に反映 --}}
+@section('title', '書籍管理番号で削除') {{-- <title> に反映 --}}
+@section('h1title', '書籍管理番号で削除') {{-- <h1itle> に反映 --}}
 
 @section('head-content')
 <style>
@@ -76,7 +76,7 @@
             <form action="/db/erase" method="post">
                 @csrf
                 <div class="form-group">
-                    <label for="delete-book-id" class="form-label">投稿番号</label>
+                    <label for="delete-book-id" class="form-label">書籍管理番号</label>
                     <input type="number" name="id" required>
                 </div>
                 <button type="submit" class="btn btn-primary mb-2">削除内容確認</button><br>

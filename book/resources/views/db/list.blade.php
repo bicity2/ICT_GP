@@ -60,7 +60,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>投稿番号</th>
+                <th>書籍管理番号</th>
                 <th>タイトル</th>
                 <th>著者</th>
                 <th>出版社</th>
@@ -72,7 +72,7 @@
         <tbody>
             @foreach ($records as $book)
             <tr>
-                <!-- 投稿番号を表示 -->
+                <!-- 書籍管理番号を表示 -->
                 <td>{{ $book->id }}</td>
                 <!-- 本のタイトルをクリックすると詳細ページに遷移 -->
                 <td><a href="{{ route('db.detail', ['id' => $book->id]) }}">{{ $book->title }}</a></td>

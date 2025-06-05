@@ -39,7 +39,7 @@
         <div class="form-wrapper">
             <div class="button-group">
                 <form action="{{ url('/db/erase') }}" method="get">
-                    <input type="submit" class="btn btn-primary btn-lg" value="投稿番号で削除">
+                    <input type="submit" class="btn btn-primary btn-lg" value="書籍管理番号で削除">
                 </form>
 
                 <form action="{{ url('/db/eraseWithBarcode') }}" method="get">
