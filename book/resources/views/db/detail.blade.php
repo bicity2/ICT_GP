@@ -71,6 +71,14 @@
                 <p class="mb-2"><strong>ISBN：</strong>{{ $record->isbn }}</p>
             </div>
 
+            <a href="https://books.google.com/books?vid={{ $record->isbn }}"
+            target="_blank"
+            class="btn btn-light border d-inline-flex align-items-center shadow-sm"
+            style="font-weight: 500; color: #5f6368;">
+                <img src="https://www.google.com/favicon.ico" alt="Google Icon" style="width: 16px; height: 16px; margin-right: 8px;">
+                Google Booksで見る
+            </a>
+
             <!-- 評価を表示＆評価をクリックでcommendページ移動する -->
             <h2 class="h4 mt-4">おすすめ度</h2>
             <div>
@@ -80,6 +88,7 @@
 
                 <p class="mb-0"><strong>おすすめ度：</strong>{{ $average }}</p>
             </div>
+            <https://books.google.com/books?vid=ISBN
             <a href="{{ route('db.comment_input', ['book_id' => $record->isbn]) }}" class="btn btn-primary mt-3">コメント投稿</a>
         </div>
         {{-- @php
