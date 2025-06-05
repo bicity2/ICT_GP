@@ -26,7 +26,7 @@ class MemberController extends Controller
                     'user_id' => $user->id,
                     'department' => $user->department,
                 ]);
-                return redirect('/db/soumu'); //総務向けメニュー
+                return redirect('db/soumu'); //総務向けメニュー
             } else {
                 // user_nameとidを両方セッションに保存
                 session([
@@ -34,7 +34,7 @@ class MemberController extends Controller
                     'user_id' => $user->id,
                     'department' => $user->department,
                 ]);
-                return redirect('/db/normal'); //一般社員向けメニュー
+                return redirect('db/normal'); //一般社員向けメニュー
             }
         }
         return back()->withErrors([
@@ -65,13 +65,13 @@ class MemberController extends Controller
     // public function store(Request $req)
     // {
     //     Book::create($req->only('isbn', 'title', 'author'));
-    //     return redirect('/db/soumu');
+    //     return redirect('db/soumu');
     // }
 
     // public function delete($id)
     // {
     //     Book::destroy($id);
-    //     return redirect('/db/soumu');
+    //     return redirect('db/soumu');
     // }
     public function logout(Request $req)
     {
@@ -92,10 +92,6 @@ class MemberController extends Controller
 
     public function normal(Request $req)
     {
-        $department = session('department');
-        if($department!=="soumu" && $department!=="normal"){
-            return redirect('index');
-        }
         return view('db.normal');
     }
 }
