@@ -88,7 +88,6 @@
 
                 <p class="mb-0"><strong>おすすめ度：</strong>{{ $average }}</p>
             </div>
-            <https://books.google.com/books?vid=ISBN
             <a href="{{ route('db.comment_input', ['book_id' => $record->isbn]) }}" class="btn btn-primary mt-3">コメント投稿</a>
         </div>
         {{-- @php
