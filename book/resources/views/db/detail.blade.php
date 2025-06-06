@@ -48,12 +48,12 @@
 <!--</head>
     <body>-->
 @section('header-content')
-<a href="{{ url('db/list') }}" class="btn btn-secondary me-2">戻る</a>
+<a href="{{ url(/db/list') }}" class="btn btn-secondary me-2">戻る</a>
 @endsection
 @section('content')
 
     {{-- <div class="d-flex justify-content-start align-items-center" style="margin-top: 16px; margin-left: 16px;">
-        <a href="{{ url('db/list') }}" class="btn btn-secondary">書籍一覧に戻る</a>
+        <a href="{{ url(/db/list') }}" class="btn btn-secondary">書籍一覧に戻る</a>
     </div> --}}
 
 <div class="form-wrapper">
