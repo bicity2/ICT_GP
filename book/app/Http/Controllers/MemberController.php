@@ -93,7 +93,7 @@ class MemberController extends Controller
     public function normal(Request $req)
     {
         $department = session('department');
-        if($department!=="soumu" && $department!=="normal"){
+        if($department!=="soumu" && $department!=="ippan"){
             return redirect('index');
         }
         return view('db.normal');

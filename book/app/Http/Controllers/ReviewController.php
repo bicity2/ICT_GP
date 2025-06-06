@@ -11,7 +11,7 @@ class ReviewController extends Controller
     public function comment_input(Request $req)
     {
         $department = session('department');
-        if($department!=="soumu" && $department!=="normal"){
+        if($department!=="soumu" && $department!=="ippan"){
             return redirect('index');
         }
 
@@ -37,7 +37,7 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $department = session('department');
-        if($department!=="soumu" && $department!=="normal"){
+        if($department!=="soumu" && $department!=="ippan"){
             return redirect('index');
         }
 
@@ -66,7 +66,7 @@ class ReviewController extends Controller
     public function destroy($id, Request $request)
     {
         $department = session('department');
-        if($department!=="soumu" && $department!=="normal"){
+        if($department!=="soumu" && $department!=="ippan"){
             return redirect('index');
         }
 

@@ -154,7 +154,7 @@ class BookController extends Controller
     public function list(Request $request)
     {
         $department = session('department');
-        if($department!=="soumu" && $department!=="normal"){
+        if($department!=="soumu" && $department!=="ippan"){
             return redirect('index');
         }
 
@@ -180,7 +180,7 @@ class BookController extends Controller
     public function detail(Request $req)
     {
         $department = session('department');
-        if($department!=="soumu" && $department!=="normal"){
+        if($department!=="soumu" && $department!=="ippan"){
             return redirect('index');
         }
 
@@ -223,7 +223,7 @@ class BookController extends Controller
     public function register(Request $request)
     {
         $department = session('department');
-        if($department!=="soumu" && $department!=="normal"){
+        if($department!=="soumu" && $department!=="ippan"){
             return redirect('index');
         }
 
