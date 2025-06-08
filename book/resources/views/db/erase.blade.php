@@ -5,28 +5,28 @@
 @section('h1title', '書籍管理番号で削除') {{-- <h1itle> に反映 --}}
 
 @section('head-content')
-<style>
-    .form-label {
-        display: block;
-        text-align: left;
-        margin-left: 00px;
-    }
+    <style>
+        .form-label {
+            display: block;
+            text-align: left;
+            margin-left: 00px;
+        }
 
-    .form-group {
-        width: 100%;
-        max-width: 400px;
-        margin-bottom: 15px;
-    }
+        .form-group {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 15px;
+        }
 
-    input[type="text"],
-    input[type="password"],
-    input[type="number"],
-    textarea {
-        width: 400px;
-        padding: 10px;
-        margin: 0px auto 10px auto;
-    }
-</style>
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        textarea {
+            width: 400px;
+            padding: 10px;
+            margin: 0px auto 10px auto;
+        }
+    </style>
 @endsection
 <!--</head>
     <body>-->

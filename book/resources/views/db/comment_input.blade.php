@@ -5,18 +5,18 @@
 @section('h1title', 'コメント投稿フォーム') {{-- <h1title> に反映 --}}
 
 @section('head-content')
-<style>
-    form {
-        max-width: 1200px;
-        min-width:1000px;
-        margin: 0 auto; /* ← 中央寄せの基本！ */
-    }
+    <style>
+        form {
+            max-width: 1200px;
+            min-width:1000px;
+            margin: 0 auto; /* ← 中央寄せの基本！ */
+        }
 
-    .form-wrapper {
-        width: 100%;
-        margin-bottom: 1.5em;
-    }
-</style>
+        .form-wrapper {
+            width: 100%;
+            margin-bottom: 1.5em;
+        }
+    </style>
 @endsection
 <!--</head>
 <body>-->

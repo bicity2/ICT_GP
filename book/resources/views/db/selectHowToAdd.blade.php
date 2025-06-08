@@ -8,13 +8,6 @@
 @section('head-content')
 
 <style>
-    /* body {
-        text-align: center;
-        padding-top: 100px;
-        position: relative;
-        height: 100vh;
-    } */
-    
     .form-group {
         margin: 20px 0;
     }

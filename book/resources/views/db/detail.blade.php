@@ -7,13 +7,6 @@
 
 @section('head-content')
     <style>
-        /* body {
-            width: 1200px;
-            margin: 10px auto;
-        } */
-    </style>
-    <title>書籍詳細とコメント</title>
-    <style>
         .container {
             display: flex;
             /* 横方向中央寄せ */
@@ -23,15 +16,12 @@
 
         .left {
             flex: 1;
-
             padding: 16px;
-            /* border-right: 1px solid #ccc; */
         }
 
         .right {
             flex: 1;
             padding: 16px;
-
         }
 
         /* コメント間の余白を大きくする */

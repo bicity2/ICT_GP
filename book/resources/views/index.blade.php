@@ -19,24 +19,18 @@
       margin: 0;
       padding: 0;
       color: #333;
-      /* font-family: sans-serif; */
       display: flex;
       flex-direction: column;
-      /* min-height: 100vh; */
     }
+
     footer {
       height: 5vh
     }
+
     .form-group {
       width: 100%;
       max-width: 400px;
       margin-bottom: 15px;
-    }
-
-    .submit {
-      /* width: 100%;
-      max-width: 100px;
-      margin-bottom: 15px; */
     }
 
     .form-label {
@@ -53,6 +47,7 @@
       padding: 10px;
       margin: 0px auto 10px auto;
     }
+
     .side-image{
       margin:0px;
     }

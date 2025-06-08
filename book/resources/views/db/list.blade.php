@@ -7,7 +7,6 @@
 
 <!--<head>-->
 @section('head-content')
-
     <style>
         /* このページのテーブル内リンクだけに適用 */
         .table {
@@ -15,6 +14,7 @@
             margin-left: 3vw;
             margin-right: 3vw;
         }
+
         .table a {
             text-decoration: none;
             transition: text-decoration 0.2s;
@@ -23,11 +23,11 @@
         .table a:hover {
             text-decoration: underline;
         }
+
         .side-image {
             width: 300px;
         }
     </style>
-
 @endsection
 <!--</head>
     <body>-->

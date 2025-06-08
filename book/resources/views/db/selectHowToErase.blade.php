@@ -5,34 +5,7 @@
 @section('h1title', '書籍削除方法を選択') {{-- <h1title> に反映 --}}
 @section('mainclass', 'main-list') {{-- <mainclass> に反映 --}}
 
-<!--<head>-->
-@section('head-content')
-
-    <style>
-        /* body {
-            text-align: center;
-            padding-top: 100px;
-            position: relative;
-            height: 100vh;
-        } */
-
-        /* .form-group {
-            margin: 20px 0;
-        } */
-
-        /* 左端にボタンを縦に並べて固定表示するスタイル */
-        /* .side-buttons {
-            position: absolute;
-            top: 50%;
-            left: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        } */
-    </style>
-@endsection
-<!--</head>
-    <body>-->
+<!--<body>-->
 @section('content')
 
     {{-- <div class="container" --}}
