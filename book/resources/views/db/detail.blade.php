@@ -1,4 +1,4 @@
-{{-- resources/views/db/list.blade.php --}}
+{{-- resources/views/db/detail.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
 @section('title', '書籍詳細とコメント') {{-- <title> に反映 --}}

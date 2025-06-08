@@ -1,4 +1,4 @@
-{{-- resources/views/db/soumu.blade.php --}}
+{{-- resources/views/db/selectHowToAdd.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
 @section('title', '書籍登録方法を選択') {{-- <title> に反映 --}}

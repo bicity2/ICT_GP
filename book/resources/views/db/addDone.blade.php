@@ -1,4 +1,4 @@
-{{-- resources/views/db/list.blade.php --}}
+{{-- resources/views/db/addDone.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
 @section('title', '書籍登録 - 完了') {{-- <title> に反映 --}}

@@ -1,4 +1,4 @@
-{{-- resources/views/db/list.addWithBarcode.php --}}
+{{-- resources/views/db/eraseWithBarcode.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
 @section('title', 'バーコードリーダーで読み取り') {{-- <title> に反映 --}}

@@ -1,4 +1,4 @@
-{{-- resources/views/db/soumu.blade.php --}}
+{{-- resources/views/db/add.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
 @section('title', '手入力で登録') {{-- <title> に反映 --}}

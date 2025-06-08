@@ -1,4 +1,4 @@
-{{-- resources/views/db/list.blade.php --}}
+{{-- resources/views/db/selectHowToErase.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
 @section('title', '書籍削除方法を選択') {{-- <title> に反映 --}}

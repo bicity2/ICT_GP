@@ -1,4 +1,4 @@
-{{-- resources/views/db/soumu.blade.php --}}
+{{-- resources/views/db/comment_input.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
 @section('title', 'コメント投稿フォーム') {{-- <title> に反映 --}}

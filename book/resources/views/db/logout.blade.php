@@ -1,4 +1,4 @@
-{{-- resources/views/db/soumu.blade.php --}}
+{{-- resources/views/db/logout.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
 @section('title', 'ログアウト') {{-- <title> に反映 --}}
