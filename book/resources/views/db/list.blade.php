@@ -33,17 +33,6 @@
     <body>-->
 @section('content')
     <div class="d-flex justify-content-start align-items-center" style="margin-top: 16px; margin-left: 16px;">
-        {{-- @php
-        $department = session('department');
-        if ($department === 'soumu') {
-        $backUrl = url('/db/soumu');
-        } elseif ($department === 'ippan') {
-        $backUrl = url('/db/normal');
-        } else {
-        $backUrl = url('/');
-        }
-        @endphp --}}
-
         <form action="/db/list" method="GET" class="d-flex ms-3 search-form align-items-center">
             <input type="text" name="keyword" class="form-control me-2" placeholder="キーワード検索" value="{{ request('keyword') }}">
             <button type="submit" class="btn btn-primary me-2">検索</button>
