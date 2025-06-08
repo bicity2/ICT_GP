@@ -4,6 +4,7 @@
 @section('title', 'コメント投稿フォーム') {{-- <title> に反映 --}}
 @section('h1title', 'コメント投稿フォーム') {{-- <h1title> に反映 --}}
 
+    <!--<head>-->
 @section('head-content')
     <style>
         form {
@@ -21,10 +22,9 @@
 <!--</head>
 <body>-->
 @section('header-content')
-<a href="{{ route('db.detail', ['id' => $book_id]) }}" class="btn btn-secondary me-2">戻る</a>
+    <a href="{{ route('db.detail', ['id' => $book_id]) }}" class="btn btn-secondary me-2">戻る</a>
 @endsection
 @section('content')
-
     <form action="{{ route('db.comment_store') }}" method="post">
         @csrf
         <input type="hidden" name="book_id" value="{{ $book_id ?? $id ?? '' }}">
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-            <br><br>
+        <br><br>
 
         <div class="form-wrapper">
             <label>おすすめ度：
@@ -48,7 +48,8 @@
                     </option>
                     @endfor
                 </select>
-            </label><br><br>
+            </label>
+            <br><br>
         </div>
 
         <div class="form-wrapper">
@@ -56,3 +57,4 @@
         </div>
     </form>
 @endsection
+<!--</body>-->

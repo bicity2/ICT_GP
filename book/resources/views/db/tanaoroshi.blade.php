@@ -7,6 +7,7 @@
   integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}">
 </head>
+
 <body>
   <h1>バーコードリーダーで読み取り</h1>
 
@@ -25,7 +26,6 @@
         const isbn = input.value.trim();
         if (isbn !== "") {
             window.location.href = `/db/addCheck/${isbn}`;
-
         }
       }
     });

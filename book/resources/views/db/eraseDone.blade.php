@@ -38,41 +38,41 @@
         }
     </style>
 @endsection
+@section('header-content')
+    <a href="{{ url('/db/selectHowToErase') }}" class="btn btn-secondary me-2">戻る</a>
+@endsection
 <!--</head>
     <body>-->
-@section('header-content')
-<a href="{{ url('/db/selectHowToErase') }}" class="btn btn-secondary me-2">戻る</a>
-@endsection
 @section('content')
-<h1>以下のデータを削除しました。</h1>
+    <h1>以下のデータを削除しました。</h1>
 
-<div class="form-wrapper">
-    <div class="button-group">
-        <table class="table">
-            <tr>
-                <th>タイトル</th>
-                <th>著者</th>
-                <th>出版社</th>
-                <th>ISBN</th>
-            </tr>
-            <tr>
-                <td>{{$title}}</td>
-                <td>{{$author}}</td>
-                <td>{{$publisher}}</td>
-                <td>{{$isbn}}</td>
-            </tr>
-        </table>
+    <div class="form-wrapper">
+        <div class="button-group">
+            <table class="table">
+                <tr>
+                    <th>タイトル</th>
+                    <th>著者</th>
+                    <th>出版社</th>
+                    <th>ISBN</th>
+                </tr>
+                <tr>
+                    <td>{{$title}}</td>
+                    <td>{{$author}}</td>
+                    <td>{{$publisher}}</td>
+                    <td>{{$isbn}}</td>
+                </tr>
+            </table>
+        </div>
     </div>
-</div>
 
-<div class="form-wrapper">
-    <img src="{{ asset('images/trash-can.gif') }}" alt="装飾画像" class="side-image">
-</div>
-
-<div class="form-wrapper">
-    <div class="button-group">
-    <a href="{{ url('/db/selectHowToErase') }}" class="btn btn-primary me-2">戻る</a>
+    <div class="form-wrapper">
+        <img src="{{ asset('images/trash-can.gif') }}" alt="装飾画像" class="side-image">
     </div>
-</div>
 
+    <div class="form-wrapper">
+        <div class="button-group">
+        <a href="{{ url('/db/selectHowToErase') }}" class="btn btn-primary me-2">戻る</a>
+        </div>
+    </div>
 @endsection
+<!--</body>-->

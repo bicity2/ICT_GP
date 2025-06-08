@@ -5,6 +5,7 @@
 @section('h1title', '書籍詳細とコメント') {{-- <h1title> に反映 --}}
 @section('mainclass', 'main-list') {{-- <mainclass> に反映 --}}
 
+<!--<head>-->
 @section('head-content')
     <style>
         .container {
@@ -35,20 +36,17 @@
         }
     </style>
 @endsection
+@section('header-content')
+    <a href="{{ url('/db/list') }}" class="btn btn-secondary me-2">戻る</a>
+@endsection
 <!--</head>
     <body>-->
-@section('header-content')
-<a href="{{ url('/db/list') }}" class="btn btn-secondary me-2">戻る</a>
-@endsection
 @section('content')
-
 <div class="form-wrapper">
-    {{-- <img src="{{ asset('images/make-effort.gif') }}" alt="装飾画像" class="side-image"> --}}
     <div class="container">
         <div class="left">
             <h2>書籍詳細</h2>
             <div class="book-details bg-light p-4 rounded shadow-sm mb-4">
-
                 <div class="book-title text-primary fw-bold mb-5" style="font-size: 40px;">
                     {{ $record->title }}
                 </div>
@@ -71,19 +69,13 @@
                 <span class="text-warning" style="font-size: 1.5em;">
                     {{ str_repeat('★', floor($average)) }}{{ ($average - floor($average)) >= 0.5 ? '☆' : '' }}{{ str_repeat('☆', 5 - ceil($average)) }}
                 </span>
-
                 <p class="mb-0"><strong>おすすめ度：</strong>{{ $average }}</p>
             </div>
             <a href="{{ route('db.comment_input', ['book_id' => $record->isbn]) }}" class="btn btn-primary mt-3">コメント投稿</a>
         </div>
-        {{-- @php
-        $department = session('department');
-        @endphp --}}
 
         <div class="right">
-
             <h2>コメント</h2>
-
             @php
             $user_id = session('user_id');
             @endphp
@@ -129,6 +121,5 @@
     </div>
     <img src="{{ asset('images/dog-understand.gif') }}" alt="装飾画像" class="side-image">
 </div>
-
 @endsection
 <!--</body>-->

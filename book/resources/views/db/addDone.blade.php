@@ -47,3 +47,4 @@
         <img src="{{ asset('images/oops.gif') }}" alt="装飾画像" class="side-image">
     </div>
 @endsection
+<!--</body>-->

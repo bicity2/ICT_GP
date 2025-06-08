@@ -4,8 +4,8 @@
 @section('title', '総務専用メニュー') {{-- <title> に反映 --}}
 @section('h1title', '総務専用メニュー') {{-- <h1title> に反映 --}}
 
+<!--<body>-->
 @section('content')
-
     <div class="form-wrapper">
         <div class="button-group">
             <a href="/db/list" class="btn btn-primary mb-2">書籍一覧</a>
@@ -15,3 +15,4 @@
         <img src="{{ asset('images/angry.gif') }}" alt="装飾画像" class="side-image">
     </div>
 @endsection
+<!--</body>-->

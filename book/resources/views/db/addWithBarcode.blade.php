@@ -5,14 +5,14 @@
 @section('h1title', 'バーコードリーダーで読み取り') {{-- <h1title> に反映 --}}
 @section('mainclass', 'main-list') {{-- <mainclass> に反映 --}}
 
-<!-- <body> -->
+<!--<head>-->
 @section('header-content')
-<a href="{{ url('/db/selectHowToAdd') }}" class="btn btn-secondary me-2">戻る</a>
+  <a href="{{ url('/db/selectHowToAdd') }}" class="btn btn-secondary me-2">戻る</a>
 @endsection
+<!--</head>
+    <body>-->
 @section('content')
-
 <div class="form-wrapper">
-
   <div class="button-group">
     <div>
       <label for="codeInput">バーコード値：</label>
@@ -33,7 +33,6 @@
             const isbn = input.value.trim();
             if (isbn !== "") {
                 window.location.href = `/db/addCheck/${isbn}`;
-                
               }
             }
           });
@@ -46,6 +45,5 @@
   </div>
   <img src="{{ asset('images/sideways.gif') }}" alt="装飾画像" class="side-image">
 </div>
-
 @endsection
 <!--</body>-->

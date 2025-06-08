@@ -1,16 +1,16 @@
 {{-- resources/views/db/soumu.blade.php --}}
 @extends('layouts.app') {{-- 共通レイアウトを使用 --}}
 
-@section('title', '書籍登録') {{-- <title> に反映 --}}
+@section('title', '手入力で登録') {{-- <title> に反映 --}}
+@section('h1title', '手入力で登録') {{-- <h1title> に反映 --}}
 
-<!--</head>
-    <body>-->
+<!--<head>-->
 @section('header-content')
 <a href="{{ url('/db/selectHowToAdd') }}" class="btn btn-secondary me-2">戻る</a>
 @endsection
-
+<!--</head>
+    <body>-->
 @section('content')
-
     <main class="content">
         <div class="form-wrapper">
             <form action="/db/addDone"method="post">
@@ -36,6 +36,5 @@
             <img src="{{ asset('images/jump.gif') }}" alt="装飾画像" class="side-image">
         </div>
     </main>
-
 @endsection
 <!--</body>-->
