@@ -1,2 +1,0 @@
-erase.blade.php -> eraseDone.phpの遷移
-　→ eraseDone.phpを通らずに、list.phpに遷移してる。
