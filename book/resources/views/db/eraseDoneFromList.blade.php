@@ -39,7 +39,7 @@
 <!--</head>
     <body>-->
 @section('header-content')
-<a href="{{ url(/db/list') }}" class="btn btn-secondary me-2">戻る</a>
+<a href="{{ url('/db/list') }}" class="btn btn-secondary me-2">戻る</a>
 @endsection
 @section('content')
 <h1>以下のデータを削除しました。</h1>
@@ -69,7 +69,7 @@
 
 <div class="form-wrapper">
     <div class="button-group">
-    <a href="{{ url(/db/list') }}" class="btn btn-primary me-2">戻る</a>
+    <a href="{{ url('/db/list') }}" class="btn btn-primary me-2">戻る</a>
     </div>
 </div>
 

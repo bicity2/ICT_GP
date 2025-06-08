@@ -48,7 +48,7 @@
 <!--</head>
     <body>-->
 @section('header-content')
-<a href="{{ url(/db/list') }}" class="btn btn-secondary me-2">戻る</a>
+<a href="{{ url('/db/list') }}" class="btn btn-secondary me-2">戻る</a>
 @endsection
 @section('content')
 
