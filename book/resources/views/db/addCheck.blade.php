@@ -75,12 +75,6 @@
     <button type="submit" class="btn btn-primary me-2">この書籍を登録</button>
   </form> --}}
 
-{{-- <div class="form-wrapper">
-    <div class="button-group">
-    <a href="{{ url(/db/addWithBarcode') }}" class="btn btn-primary me-2">戻る</a>
-    </div>
-</div> --}}
-
   {{-- <a href="{{ route('db.addWithBarcode') }}" class="btn btn-secondary mt-3">戻る</a> --}}
 @endsection
 

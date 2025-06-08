@@ -52,10 +52,6 @@
 @endsection
 @section('content')
 
-    {{-- <div class="d-flex justify-content-start align-items-center" style="margin-top: 16px; margin-left: 16px;">
-        <a href="{{ url(/db/list') }}" class="btn btn-secondary">書籍一覧に戻る</a>
-    </div> --}}
-
 <div class="form-wrapper">
     {{-- <img src="{{ asset('images/make-effort.gif') }}" alt="装飾画像" class="side-image"> --}}
     <div class="container">
