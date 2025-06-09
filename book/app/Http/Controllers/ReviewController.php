@@ -10,6 +10,11 @@ class ReviewController extends Controller
 {
     public function comment_input(Request $req)
     {
+        $department = session('department');
+        if($department!=="soumu" && $department!=="ippan"){
+            return redirect('index');
+        }
+
         // セッションからuser_nameとidを取得
         $user_name = session('user_name');
         $user_id = session('user_id');
@@ -31,6 +36,10 @@ class ReviewController extends Controller
 
     public function store(Request $request)
     {
+        $department = session('department');
+        if($department!=="soumu" && $department!=="ippan"){
+            return redirect('index');
+        }
 
         // セッションからuser_nameとidを取得
         $user_name = session('user_name');
@@ -53,8 +62,14 @@ class ReviewController extends Controller
         // 詳細画面にリダイレクト
         return redirect()->route('db.detail', ['id' => $request->book_id]);
     }
+
     public function destroy($id, Request $request)
     {
+        $department = session('department');
+        if($department!=="soumu" && $department!=="ippan"){
+            return redirect('index');
+        }
+
         $review = \App\Models\Review::findOrFail($id);
         $review->delete();
         return redirect()->route('db.detail', ['id' => $request->book_id]);

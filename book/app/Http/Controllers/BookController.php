@@ -18,50 +18,63 @@ class BookController extends Controller
 
     public function add()
     {
+        $department = session('department');
+        if($department!=="soumu"){
+            return redirect('index');
+        }
         return view('db.add');
     }
 
     public function addDone(Request $req)
-{
-    $req->validate([
-        'title' => 'required|string|max:255',
-        'author' => 'required|string|max:255',
-        'publisher' => 'required|string|max:255',
-        'isbn' => 'required|string|size:13',
-    ]);
+    {
+        $department = session('department');
+        if($department!=="soumu"){
+            return redirect('index');
+        }
+        $req->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'publisher' => 'required|string|max:255',
+            'isbn' => 'required|string|size:13',
+        ]);
 
-    $existingBook = Book::where('isbn', $req->isbn)->first();
+        $existingBook = Book::where('isbn', $req->isbn)->first();
 
-    if ($existingBook) {
-        // 既存の書籍がある場合 → 在庫を増やす
-        $existingBook->increment('stock');
-        $book = $existingBook;
-    } else {
-        // 新しい書籍の場合 → 新規作成（初期在庫は1）
-        $book = new Book();
-        $book->title = $req->title;
-        $book->author = $req->author;
-        $book->publisher = $req->publisher;
-        $book->isbn = $req->isbn;
-        $book->stock = 1;
-        $book->save();
+        if ($existingBook) {
+            // 既存の書籍がある場合 → 在庫を増やす
+            $existingBook->increment('stock');
+            $book = $existingBook;
+        } else {
+            // 新しい書籍の場合 → 新規作成（初期在庫は1）
+            $book = new Book();
+            $book->title = $req->title;
+            $book->author = $req->author;
+            $book->publisher = $req->publisher;
+            $book->isbn = $req->isbn;
+            $book->stock = 1;
+            $book->save();
+        }
+
+        $data = [
+            'title' => $book->title,
+            'author' => $book->author,
+            'publisher' => $book->publisher,
+            'isbn' => $book->isbn,
+            'stock' => $book->stock,
+        ];
+
+        return view('db.addDone', $data);
     }
-
-    $data = [
-        'title' => $book->title,
-        'author' => $book->author,
-        'publisher' => $book->publisher,
-        'isbn' => $book->isbn,
-        'stock' => $book->stock,
-    ];
-
-    return view('db.addDone', $data);
-}
 
 
 
     public function erase(Request $req)
     {
+        $department = session('department');
+        if($department!=="soumu"){
+            return redirect('index');
+        }
+
         if ($req->isMethod('get'))
             return view('db.erase');
         elseif ($req->isMethod('post'))
@@ -72,9 +85,13 @@ class BookController extends Controller
         return view('db.erase', $data);
     }
 
-    
+
     public function eraseDone(Request $req)
     {
+        $department = session('department');
+        if($department!=="soumu"){
+            return redirect('index');
+        }
         $book = Book::where('isbn', $req->isbn)->first();
         // $book = Book::find($req->id);
         
@@ -103,6 +120,11 @@ class BookController extends Controller
 
     public function eraseDoneFromList(Request $req)
     {
+        $department = session('department');
+        if($department!=="soumu"){
+            return redirect('index');
+        }
+
         $book = Book::find($req->id);
 
         if (!$book) {
@@ -131,6 +153,11 @@ class BookController extends Controller
 
     public function list(Request $request)
     {
+        $department = session('department');
+        if($department!=="soumu" && $department!=="ippan"){
+            return redirect('index');
+        }
+
         $keyword = $request->input('keyword'); // フォームからキーワード取得
 
         $query = Book::query();
@@ -152,6 +179,11 @@ class BookController extends Controller
 
     public function detail(Request $req)
     {
+        $department = session('department');
+        if($department!=="soumu" && $department!=="ippan"){
+            return redirect('index');
+        }
+
         // 13桁ならISBN、それ以外はidとみなす（必要に応じて調整）
         if (is_numeric($req->id) && strlen($req->id) < 13) {
             $book = Book::find($req->id);
@@ -187,8 +219,14 @@ class BookController extends Controller
         return view('db.detail', $data);
     }
 
+    // 未使用のメソッド？
     public function register(Request $request)
     {
+        $department = session('department');
+        if($department!=="soumu" && $department!=="ippan"){
+            return redirect('index');
+        }
+
         // バリデーション（任意だが推奨）
         $request->validate([
             'title' => 'required|string|max:255',
@@ -196,12 +234,12 @@ class BookController extends Controller
             'isbn' => 'required|string|size:13|unique:books,isbn',
         ]);
 
-    // 登録（1回で十分）
-    Book::create([
-        'title' => $request->title,
-        'author' => $request->author,
-        'isbn' => $request->isbn,
-    ]);
+        // 登録（1回で十分）
+        Book::create([
+            'title' => $request->title,
+            'author' => $request->author,
+            'isbn' => $request->isbn,
+        ]);
 
 
         return redirect()->route('books.index')->with('message', '登録が完了しました');
@@ -209,11 +247,21 @@ class BookController extends Controller
 
     public function addWithBarcode()
     {
+        $department = session('department');
+        if($department!=="soumu"){
+            return redirect('index');
+        }
+
         return view('db.addWithBarcode');
     }
 
     public function addCheck($isbn)
     {
+        $department = session('department');
+        if($department!=="soumu"){
+            return redirect('index');
+        }
+
         $bookInfo = $this->fetchBookInfoByISBN($isbn);
 
         return view('db.addCheck', [
@@ -256,6 +304,11 @@ class BookController extends Controller
     
     public function eraseCheck($isbn)
     {
+        $department = session('department');
+        if($department!=="soumu"){
+            return redirect('index');
+        }
+
         // ISBN に一致する書籍を取得
         $book = Book::where('isbn', $isbn)->first();
 
@@ -277,6 +330,11 @@ class BookController extends Controller
 
     public function eraseWithBarcode()
     {
+        $department = session('department');
+        if($department!=="soumu"){
+            return redirect('index');
+        }
+
         return view('db.eraseWithBarcode');
     }
 
